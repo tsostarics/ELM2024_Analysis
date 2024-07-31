@@ -1,0 +1,389 @@
+---
+title: "Lexical Decision Data Processing"
+format: 
+  html:
+    embed-resources: true
+    self-contained: true
+project:
+  execute-dir: project
+editor_options: 
+  chunk_output_type: console
+---
+
+## Overview
+
+This document is for the ELM 2024 paper "".
+Here we show the following things:
+
+- Wrangle the raw data, which has been preprocessed from individual CSV files
+and filtered according to survey results (the *raw* raw data and the survey
+data are not included here).
+- Fit (only) the lexical decision models reported in the paper
+- Create the RT results plots shown in the paper
+
+I'm restricting what's available in this document to be only what was reported
+in the paper.
+
+### Important notes
+
+In this document, HIGHER refers to the participant HEARS the HIGHER alternative
+and SEES the LOWER alternative.
+LOWER refers to the participant HEARS the LOWER alternative and SEES the HIGHER
+alternative.
+This is the OPPOSITE of how it's discussed in the paper.
+Yes this is unfortunate but I do NOT want to recode all the experiments.
+In plots the results are re-labeled to match what's in the paper.
+So, when you see differences of `lower-higher` here, this means a difference of
+`(RT when higher alternative is shown) - (RT when lower alternative is shown)`
+
+`contrastable` and `sosdiss2` are available on my github at `github.com/tsostarics`.
+The former is useful for anyone, the latter is just reusable functions for
+my dissertation.
+
+## Setup
+
+```{r setup, message=FALSE}
+library(tidyverse)    # Data wrangling
+library(contrastable) # Contrast coding
+library(sosdiss2)     # Helpers used across other projects
+library(brms)         # Bayesian modeling
+library(cmdstanr)     # Stan backend
+library(rstan)        # stan backend, loo_compare uses it
+library(bayestestR)   # Bayesian helpers
+library(tidybayes)    # 
+library(ggdist)       #
+library(ggnewscale)   # Plot scale helpers
+library(here)         # Directory management
+
+source(here::here("Helpers/brms_helpers.R")) # TODO: delete this
+```
+
+## Data wrangling
+
+Load the raw experimental data and lexical measures, processes the data to
+the final dataset fed to the model.
+
+```{r, message = FALSE}
+exp_data <- readRDS("Data/01_Processed/exp_data.rds")
+
+# Load the lexical measures
+metrics <- 
+  readr::read_csv(here::here("Data/elexicon_metrics.csv")) |> 
+  dplyr::mutate(Word = toupper(Word),
+                center_log_freq = Log_Freq_HAL - mean(Log_Freq_HAL),
+                center_length = Length - mean(Length),
+                center_nsyl =  NSyll - median(NSyll))
+
+flag_trial_outliers <- function(data,
+                                by = 'participant',
+                                rt_threshold = 1500,
+                                rd_threshold = 40) {
+  dplyr::mutate(ungroup(data),
+                is_outlier = rt < 200 | rt > rt_threshold | rd < rd_threshold,
+                .by = all_of(by))
+}
+
+# Relevant contrasts we want to explicitly set
+model_contrasts <- list(tune ~ sum_code + "hll",
+                        condition ~ treatment_code + "lower")
+
+# Wrangle the dataset to use for modeling
+model_data <- 
+  exp_data |> 
+  flag_trial_outliers() |> 
+  # Restrict to only the critical trials they got correct
+  dplyr::filter(condition %in% c('higher', 'lower'),
+                !is_outlier,
+                is_correct) |>
+  # Some centering and data transformations
+  sosdiss2::wrangle_covariates() |> 
+  sosdiss2::join_metrics(metrics) |> 
+  set_contrasts(model_contrasts)
+
+# Contrast information
+glimpse_contrasts(model_data, model_contrasts,add_namespace = TRUE)
+```
+
+## Modeling
+
+So the approach I take here is to set the hyperparameters for the models once,
+then change the formula and dataset as needed.
+This is to avoid needing to remember to change things like the number of
+iterations and loo criteria across models.
+
+```{r model-setup}
+# Set weak priors for the model
+base_model_priors <- 
+  c(
+    prior(normal(0,.03), class = 'b'),
+    prior(lkj(2), class = 'cor'),
+    prior(normal(.3,.4), class = 'sd')
+  )
+# 
+# fit_generic_rt_model <- function(formula, filename, data=model_data, priors=base_model_priors) {
+#   mdl <- brm(formula = formula,
+#              data = data,
+#              family = lognormal(),
+#              seed = 111,
+#              cores = 4,
+#              chains = 4,
+#              threads = threading(3),
+#              file = file.path(here::here("Models"), paste0(filename, ".rds")),
+#              file_refit = "on_change",
+#              iter = 10000,
+#              warmup = 2000,
+#              thin = 2,
+#              silent = 0,
+#              verbose = TRUE,
+#              save_pars = save_pars(all = TRUE),
+#              backend = 'cmdstanr',
+#              prior = priors)
+#   
+#   if (!'loo' %in% names(mdl[['criteria']]))
+#     message("Starting loo: ", Sys.time())
+#   
+#   add_criterion(mdl, "loo")
+# }
+
+
+fit_generic_rt_model <- function(formula, filename, data=model_data, priors=base_model_priors) {
+  model_call <- expression(brm(formula = formula,
+                               data = data,
+                               family = lognormal(),
+                               seed = 111,
+                               cores = 4,
+                               chains = 4,
+                               threads = threading(3),
+                               file = file.path(here::here("Models"), paste0(filename, ".rds")),
+                               file_refit = "on_change",
+                               iter = 10000,
+                               warmup = 2000,
+                               thin = 2,
+                               silent = 0,
+                               save_pars = save_pars(all = TRUE),
+                               backend = 'cmdstanr',
+                               prior = priors))
+  
+  model_call[[1]][[1]] <- sym('diagnose_refit')
+  should_refit <- determine_refit(eval(model_call))
+  
+  message("Refit status for ", filename, ": ", should_refit)
+  
+  model_call[[1]][[1]] <- sym('brm')
+  model_call[[1]]$file_refit <- should_refit 
+  
+  mdl <- eval(model_call)
+  
+  if (!'loo' %in% names(mdl[['criteria']]))
+    message("Starting loo: ", Sys.time())
+  
+  add_criterion(mdl, "loo")
+}
+```
+
+### Critical intonation model
+
+The main model controls for word frequency, word length,and experiment block.
+The predictors of interest are tune, which shows deviation from the grand mean
+for the lower (hear cool see cold) condition. The interaction with condition
+shows how different a tune behaves in the higher condition compared to the
+lower condition.
+
+```{r fit-models}
+base_critical_WKSLP <- 
+  fit_generic_rt_model(bf(rt ~  center_log_freq + center_length + block + tune *condition +
+                            (1+tune*condition|participant) + (1+tune*condition|item),
+                          sigma ~ (1|participant) + (1|item)),
+                       "base_critical_WKSLP")
+
+# This model is the same as the main model but doesn't model the sigma
+# parameter for participants/items
+bmdl_simple <- 
+  fit_generic_rt_model(bf(rt ~  center_log_freq + center_length + block + tune *condition +
+                            (1+tune*condition|participant) + (1+tune*condition|item)),
+                       "base_nosigma_WKSLP")
+
+# Compare whether the sigma parameter is beneficial
+loo_compare(bmdl_simple, base_critical_WKSLP)
+```
+
+#### Model prediction plots
+
+Below we plot the posterior RT distributions.
+
+```{r}
+# Data grid at covariate centers
+dg <- 
+  sosdiss2::marginal_data_grid(model = base_critical_WKSLP,
+                               'tune',
+                               'condition',
+                               center_log_freq = 0,
+                               center_length = 0,
+                               block = 0) 
+
+condition_difference_draws <- 
+  sosdiss2::get_condition_difference_draws(base_critical_WKSLP, dg,
+                                           TUNE_ORDER = c("hll",
+                                                          "lhsll",
+                                                          "lshll",
+                                                          "hlh",
+                                                          "lhslh",
+                                                          "lshlh"))
+posterior_residrt_plot <- 
+  sosdiss2::plot_posterior_rt_draws2(condition_difference_draws,
+                                     slab_scale = .5,
+                                     facet_labels = c(higher="Hear cold, see cool",
+                                                      lower="Hear cool, see cold")) + 
+  scale_y_continuous(labels = scales::label_percent(), limits = c(-.05, .05))+
+  scale_x_discrete(labels = c("H*LL", "LH*LL", "L*HLL", "H*LH", "LH*LH", "L*HLH"))
+
+posterior_residrt_plot
+
+save_plot(posterior_residrt_plot,
+          "ldonly_basemodel_epred_speedup2",
+          rootdir = "Figures",
+          use_subfolders = TRUE,
+          width =8.5, height = 4.5, scale = 1.2)
+```
+
+
+## Condition-only RTs
+
+Below we wrangle the data for the model using the HF16 items.
+
+```{r, message = FALSE}
+# Wrangle the dataset to use for modeling, including the HF16-adapted items
+alldata_contrasts <- list(tune ~ sum_code + "hll",
+                          condition ~ helmert_code | c('lower-higher',
+                                                       'contr-scalar',
+                                                       'noncontr-contr',
+                                                       'unrelated-related'))
+
+model_data_alldata <- 
+  exp_data |> 
+  flag_trial_outliers() |> 
+  dplyr::filter(condition != "filler",
+                !is_outlier,
+                is_correct) |>
+  # Some centering and data transformations
+  sosdiss2::wrangle_covariates() |> 
+  sosdiss2::join_metrics(metrics) |> 
+  dplyr::mutate(experiment_set = ifelse(condition %in% c('contrastive', 
+                                                         'noncontrastive',
+                                                         'unrelated'),
+                                        'hf16',
+                                        condition),
+                experiment_set = factor(experiment_set,
+                                        levels = c('higher', 'lower','hf16')),
+                condition = factor(condition, levels = c("higher", "lower",
+                                                         "contrastive", "noncontrastive",
+                                                         "unrelated"))) |> 
+  set_contrasts(alldata_contrasts)
+
+# Contrast information
+glimpse_contrasts(model_data_alldata, alldata_contrasts,add_namespace = TRUE)
+
+# Verifying the helmert direction
+MASS::fractions(contrasts(model_data_alldata$condition))
+```
+
+Below we fit the model for the condition-level predictions (ie without intonation).
+The HF16-adapted items are only recorded with a single tune (out of 6), so we
+don't include tune *and* random intercepts by item for that dataset.
+
+```{r}
+# Set weak priors for the model
+alldata_priors <- 
+  c(
+    prior(normal(0,.03), class = 'b'),
+    prior(lkj(2), class = 'cor'),
+    prior(normal(.3,.4), class = 'sd')
+  )
+
+alldata_mdl_notune <- 
+  fit_generic_rt_model(bf(rt ~  center_log_freq + center_length + block + condition +
+                            (1+condition|participant),
+                          sigma ~ (1|participant)),
+                       "alldata_mdl_notune",
+                       data = model_data_alldata,
+                       priors = alldata_priors)
+
+
+alldata_mdl_notune2 <- 
+  fit_generic_rt_model(bf(rt ~  center_log_freq + center_length + block + condition +
+                            (1+condition|participant) + (1|original_item),
+                          sigma ~ (1|participant)+ (1|original_item)),
+                       "alldata_mdl_notune2",
+                       data = model_data_alldata,
+                       priors = alldata_priors)
+
+loo_compare(alldata_mdl_notune, alldata_mdl_notune2)
+```
+
+Make the barplot figure.
+
+```{r}
+datagrid_without_tunes <- 
+  marginal_data_grid(model = alldata_mdl_notune2,
+                     'condition',
+                     center_log_freq = 0,
+                     center_length = 0,
+                     block = 0) 
+
+alldata_cond_draws <- tidybayes::add_epred_draws(datagrid_without_tunes, 
+                                                 alldata_mdl_notune2, 
+                                                 ndraws = NULL, 
+                                                 seed = 11, 
+                                                 re_formula = NA)
+
+predicted_condition_rt_plot <- 
+  alldata_cond_draws |> 
+  mean_hdi(.width = c(.95)) |> 
+  ggplot(aes(x = condition, y = .epred, ymin = .lower, ymax = .upper)) +
+  # geom_point() +
+  geom_col(width = .75, color = 'black', fill = 'gray60') +
+  geom_errorbar(width = .4) +
+  coord_cartesian(ylim = c(400,620)) +
+  theme_bw(base_size = 16) +
+  scale_x_discrete(labels = c("Lower\n(cool)", 
+                              "Higher\n(cold)", 
+                              "Contrastive\n(painter)", 
+                              "NonContrastive\n(statue)", 
+                              "Unrelated\n(register)"))+
+  ylab("Predicted RT") +
+  xlab("Condition") +
+  theme(
+    panel.grid = element_line(linewidth = .3),
+    panel.grid.major.x = element_blank())
+
+predicted_condition_rt_plot
+
+save_plot(predicted_condition_rt_plot, "predicted_condition_RT",
+          width = 8, height = 4.5)
+
+```
+
+## Inline statistics
+
+Inline statistics are reported using the latex commands created below, see
+https://tsostaricsblog.netlify.app/posts/latexswitch/ for more information.
+
+```{r}
+suppressWarnings(
+  broom.mixed::tidy(base_critical_WKSLP, 
+                    effects = "fixed", 
+                    conf.int=TRUE)
+) |> 
+  mutate(pct_change = round(100*(exp(estimate) - 1),2),
+         term = casefold(gsub(":", "i", term)),
+         term = gsub("[)(]", "", term),
+         across(all_of(c('estimate', 'conf.low', 'conf.high')), ~round(.,3))) |> 
+  make_latex_switch(fstring = "$(\\hat\\beta = {estimate}, \\%\\Delta= {pct_change}\\%, CI=[{conf.low},{conf.high}])$",
+                    macroname = "tuneStat",
+                    add_found_boolean = FALSE)
+
+sosdiss2::model_to_latex_switch(alldata_mdl_notune2,
+                                "conditionStat", 
+                                add_found_boolean = FALSE)
+```
+
