@@ -11,7 +11,8 @@ editor_options:
 ---
 
 This document presents the analysis code for the inference task reported in
-XX.
+*Relating Scalar Inference and Alternative Activation: A View from the Rise-Fall-Rise Tune in American English*
+(Sostarics, Ronai, and Cole 2024).
 We only include the code related to the specific analyses and figures
 presented in the paper.
 

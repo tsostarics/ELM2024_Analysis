@@ -14,17 +14,12 @@ execute:
 
 ## Overview
 
-This document is for the ELM 2024 paper "".
-Here we show the following things:
 
-- Wrangle the raw data, which has been preprocessed from individual CSV files
-and filtered according to survey results (the *raw* raw data and the survey
-data are not included here).
-- Fit (only) the lexical decision models reported in the paper
-- Create the RT results plots shown in the paper
-
-I'm restricting what's available in this document to be only what was reported
-in the paper.
+This document presents the analysis code for the lexical decision task reported in
+*Relating Scalar Inference and Alternative Activation: A View from the Rise-Fall-Rise Tune in American English*
+(Sostarics, Ronai, and Cole 2024).
+We only include the code related to the specific analyses and figures
+presented in the paper.
 
 ### Important notes
 
@@ -33,13 +28,12 @@ and SEES the LOWER alternative.
 LOWER refers to the participant HEARS the LOWER alternative and SEES the HIGHER
 alternative.
 This is the OPPOSITE of how it's discussed in the paper.
-Yes this is unfortunate but I do NOT want to recode all the experiments.
 In plots the results are re-labeled to match what's in the paper.
 So, when you see differences of `lower-higher` here, this means a difference of
 `(RT when higher alternative is shown) - (RT when lower alternative is shown)`
 
 `contrastable` and `sosdiss2` are available on my github at `github.com/tsostarics`.
-The former is useful for anyone, the latter is just reusable functions for
+The former is useful for anyone, the latter provides reusable functions for
 my dissertation.
 
 ## Setup

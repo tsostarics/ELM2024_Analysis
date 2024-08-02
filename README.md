@@ -1,6 +1,10 @@
 ## ELM 2024 Analysis
 
-This directory is for the analysis code related to X
+This respository presents the analysis code for
+*Relating Scalar Inference and Alternative Activation: A View from the Rise-Fall-Rise Tune in American English*
+(Sostarics, Ronai, and Cole 2024).
+
+We only include the code related to the specific analyses and figures presented in the paper.
 
 ## Top-level files
 
