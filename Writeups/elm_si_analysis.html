@@ -3102,7 +3102,8 @@ vertical-align: -.125em;
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sosdiss2)     <span class="co"># Shared project helpers</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)         <span class="co"># Path handler</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)    <span class="co"># Draws handler</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)       <span class="co"># Draws plotting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)       <span class="co"># Draws plotting</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">keep.source =</span> <span class="cn">TRUE</span>, <span class="at">width =</span> <span class="dv">180</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="si-model" class="level2">
 <h2 class="anchored" data-anchor-id="si-model">SI Model</h2>
@@ -3176,96 +3177,52 @@ Formula: resp_yes ~ tune + (1 + tune | subj_id) + (1 + tune | item)
 
 Multilevel Hyperparameters:
 ~item (Number of levels: 64) 
-                                 Estimate Est.Error l-95% CI u-95% CI Rhat
-sd(Intercept)                        1.41      0.12     1.19     1.67 1.00
-sd(tunelhsllMhll)                    0.24      0.16     0.01     0.60 1.00
-sd(tunelshllMhll)                    0.29      0.17     0.02     0.64 1.00
-sd(tuneRFRMFall)                     0.20      0.12     0.01     0.45 1.00
-sd(tunelhslhMhlh)                    0.41      0.19     0.04     0.78 1.00
-sd(tunelshlhMhlh)                    0.25      0.17     0.01     0.62 1.00
-cor(Intercept,tunelhsllMhll)        -0.05      0.31    -0.64     0.56 1.00
-cor(Intercept,tunelshllMhll)         0.27      0.30    -0.39     0.76 1.00
-cor(tunelhsllMhll,tunelshllMhll)     0.05      0.33    -0.59     0.66 1.00
-cor(Intercept,tuneRFRMFall)         -0.11      0.28    -0.63     0.47 1.00
-cor(tunelhsllMhll,tuneRFRMFall)     -0.05      0.33    -0.66     0.60 1.00
-cor(tunelshllMhll,tuneRFRMFall)      0.00      0.32    -0.61     0.62 1.00
-cor(Intercept,tunelhslhMhlh)         0.24      0.26    -0.32     0.69 1.00
-cor(tunelhsllMhll,tunelhslhMhlh)    -0.06      0.33    -0.66     0.58 1.00
-cor(tunelshllMhll,tunelhslhMhlh)     0.19      0.32    -0.48     0.74 1.00
-cor(tuneRFRMFall,tunelhslhMhlh)      0.06      0.32    -0.56     0.64 1.00
-cor(Intercept,tunelshlhMhlh)        -0.04      0.31    -0.61     0.57 1.00
-cor(tunelhsllMhll,tunelshlhMhlh)     0.09      0.33    -0.57     0.69 1.00
-cor(tunelshllMhll,tunelshlhMhlh)    -0.04      0.33    -0.65     0.60 1.00
-cor(tuneRFRMFall,tunelshlhMhlh)     -0.08      0.33    -0.68     0.57 1.00
-cor(tunelhslhMhlh,tunelshlhMhlh)     0.03      0.33    -0.61     0.63 1.00
-                                 Bulk_ESS Tail_ESS
-sd(Intercept)                        2068     3556
-sd(tunelhsllMhll)                    3227     3805
-sd(tunelshllMhll)                    3055     3280
-sd(tuneRFRMFall)                     2713     3056
-sd(tunelhslhMhlh)                    2614     2685
-sd(tunelshlhMhlh)                    2881     3417
-cor(Intercept,tunelhsllMhll)        13389     5637
-cor(Intercept,tunelshllMhll)         9316     5371
-cor(tunelhsllMhll,tunelshllMhll)     8482     6581
-cor(Intercept,tuneRFRMFall)         11801     5823
-cor(tunelhsllMhll,tuneRFRMFall)      5883     5779
-cor(tunelshllMhll,tuneRFRMFall)      6610     6565
-cor(Intercept,tunelhslhMhlh)        10632     4965
-cor(tunelhsllMhll,tunelhslhMhlh)     5304     5795
-cor(tunelshllMhll,tunelhslhMhlh)     4711     6163
-cor(tuneRFRMFall,tunelhslhMhlh)      5549     6028
-cor(Intercept,tunelshlhMhlh)        12050     5197
-cor(tunelhsllMhll,tunelshlhMhlh)     7232     6175
-cor(tunelshllMhll,tunelshlhMhlh)     7338     6318
-cor(tuneRFRMFall,tunelshlhMhlh)      6641     6434
-cor(tunelhslhMhlh,tunelshlhMhlh)     8109     6419
+                                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)                        1.41      0.12     1.19     1.67 1.00     2068     3556
+sd(tunelhsllMhll)                    0.24      0.16     0.01     0.60 1.00     3227     3805
+sd(tunelshllMhll)                    0.29      0.17     0.02     0.64 1.00     3055     3280
+sd(tuneRFRMFall)                     0.20      0.12     0.01     0.45 1.00     2713     3056
+sd(tunelhslhMhlh)                    0.41      0.19     0.04     0.78 1.00     2614     2685
+sd(tunelshlhMhlh)                    0.25      0.17     0.01     0.62 1.00     2881     3417
+cor(Intercept,tunelhsllMhll)        -0.05      0.31    -0.64     0.56 1.00    13389     5637
+cor(Intercept,tunelshllMhll)         0.27      0.30    -0.39     0.76 1.00     9316     5371
+cor(tunelhsllMhll,tunelshllMhll)     0.05      0.33    -0.59     0.66 1.00     8482     6581
+cor(Intercept,tuneRFRMFall)         -0.11      0.28    -0.63     0.47 1.00    11801     5823
+cor(tunelhsllMhll,tuneRFRMFall)     -0.05      0.33    -0.66     0.60 1.00     5883     5779
+cor(tunelshllMhll,tuneRFRMFall)      0.00      0.32    -0.61     0.62 1.00     6610     6565
+cor(Intercept,tunelhslhMhlh)         0.24      0.26    -0.32     0.69 1.00    10632     4965
+cor(tunelhsllMhll,tunelhslhMhlh)    -0.06      0.33    -0.66     0.58 1.00     5304     5795
+cor(tunelshllMhll,tunelhslhMhlh)     0.19      0.32    -0.48     0.74 1.00     4711     6163
+cor(tuneRFRMFall,tunelhslhMhlh)      0.06      0.32    -0.56     0.64 1.00     5549     6028
+cor(Intercept,tunelshlhMhlh)        -0.04      0.31    -0.61     0.57 1.00    12050     5197
+cor(tunelhsllMhll,tunelshlhMhlh)     0.09      0.33    -0.57     0.69 1.00     7232     6175
+cor(tunelshllMhll,tunelshlhMhlh)    -0.04      0.33    -0.65     0.60 1.00     7338     6318
+cor(tuneRFRMFall,tunelshlhMhlh)     -0.08      0.33    -0.68     0.57 1.00     6641     6434
+cor(tunelhslhMhlh,tunelshlhMhlh)     0.03      0.33    -0.61     0.63 1.00     8109     6419
 
 ~subj_id (Number of levels: 83) 
-                                 Estimate Est.Error l-95% CI u-95% CI Rhat
-sd(Intercept)                        0.83      0.08     0.69     1.00 1.00
-sd(tunelhsllMhll)                    0.30      0.18     0.02     0.68 1.00
-sd(tunelshllMhll)                    0.23      0.15     0.01     0.58 1.00
-sd(tuneRFRMFall)                     0.12      0.09     0.01     0.32 1.00
-sd(tunelhslhMhlh)                    0.19      0.13     0.01     0.49 1.00
-sd(tunelshlhMhlh)                    0.23      0.15     0.01     0.58 1.00
-cor(Intercept,tunelhsllMhll)         0.18      0.29    -0.44     0.70 1.00
-cor(Intercept,tunelshllMhll)        -0.15      0.31    -0.69     0.50 1.00
-cor(tunelhsllMhll,tunelshllMhll)     0.07      0.34    -0.58     0.69 1.00
-cor(Intercept,tuneRFRMFall)          0.05      0.32    -0.58     0.65 1.00
-cor(tunelhsllMhll,tuneRFRMFall)     -0.06      0.33    -0.66     0.58 1.00
-cor(tunelshllMhll,tuneRFRMFall)     -0.00      0.33    -0.63     0.62 1.00
-cor(Intercept,tunelhslhMhlh)         0.07      0.32    -0.57     0.67 1.00
-cor(tunelhsllMhll,tunelhslhMhlh)    -0.02      0.33    -0.64     0.61 1.00
-cor(tunelshllMhll,tunelhslhMhlh)    -0.02      0.34    -0.65     0.62 1.00
-cor(tuneRFRMFall,tunelhslhMhlh)      0.01      0.33    -0.62     0.64 1.00
-cor(Intercept,tunelshlhMhlh)         0.08      0.31    -0.54     0.65 1.00
-cor(tunelhsllMhll,tunelshlhMhlh)     0.02      0.33    -0.62     0.65 1.00
-cor(tunelshllMhll,tunelshlhMhlh)    -0.02      0.33    -0.63     0.61 1.00
-cor(tuneRFRMFall,tunelshlhMhlh)      0.02      0.33    -0.62     0.64 1.00
-cor(tunelhslhMhlh,tunelshlhMhlh)     0.06      0.33    -0.59     0.67 1.00
-                                 Bulk_ESS Tail_ESS
-sd(Intercept)                        3110     4502
-sd(tunelhsllMhll)                    3011     3722
-sd(tunelshllMhll)                    3821     3865
-sd(tuneRFRMFall)                     4105     3952
-sd(tunelhslhMhlh)                    4453     4649
-sd(tunelshlhMhlh)                    3050     3770
-cor(Intercept,tunelhsllMhll)        10371     5548
-cor(Intercept,tunelshllMhll)        11521     5805
-cor(tunelhsllMhll,tunelshllMhll)     8351     6483
-cor(Intercept,tuneRFRMFall)         15017     5328
-cor(tunelhsllMhll,tuneRFRMFall)     10439     6456
-cor(tunelshllMhll,tuneRFRMFall)      8852     6025
-cor(Intercept,tunelhslhMhlh)        13337     5843
-cor(tunelhsllMhll,tunelhslhMhlh)     9663     6641
-cor(tunelshllMhll,tunelhslhMhlh)     8030     6691
-cor(tuneRFRMFall,tunelhslhMhlh)      7847     6053
-cor(Intercept,tunelshlhMhlh)        12483     5660
-cor(tunelhsllMhll,tunelshlhMhlh)     9712     6651
-cor(tunelshllMhll,tunelshlhMhlh)     8266     6768
-cor(tuneRFRMFall,tunelshlhMhlh)      5769     6442
-cor(tunelhslhMhlh,tunelshlhMhlh)     6633     7240
+                                 Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)                        0.83      0.08     0.69     1.00 1.00     3110     4502
+sd(tunelhsllMhll)                    0.30      0.18     0.02     0.68 1.00     3011     3722
+sd(tunelshllMhll)                    0.23      0.15     0.01     0.58 1.00     3821     3865
+sd(tuneRFRMFall)                     0.12      0.09     0.01     0.32 1.00     4105     3952
+sd(tunelhslhMhlh)                    0.19      0.13     0.01     0.49 1.00     4453     4649
+sd(tunelshlhMhlh)                    0.23      0.15     0.01     0.58 1.00     3050     3770
+cor(Intercept,tunelhsllMhll)         0.18      0.29    -0.44     0.70 1.00    10371     5548
+cor(Intercept,tunelshllMhll)        -0.15      0.31    -0.69     0.50 1.00    11521     5805
+cor(tunelhsllMhll,tunelshllMhll)     0.07      0.34    -0.58     0.69 1.00     8351     6483
+cor(Intercept,tuneRFRMFall)          0.05      0.32    -0.58     0.65 1.00    15017     5328
+cor(tunelhsllMhll,tuneRFRMFall)     -0.06      0.33    -0.66     0.58 1.00    10439     6456
+cor(tunelshllMhll,tuneRFRMFall)     -0.00      0.33    -0.63     0.62 1.00     8852     6025
+cor(Intercept,tunelhslhMhlh)         0.07      0.32    -0.57     0.67 1.00    13337     5843
+cor(tunelhsllMhll,tunelhslhMhlh)    -0.02      0.33    -0.64     0.61 1.00     9663     6641
+cor(tunelshllMhll,tunelhslhMhlh)    -0.02      0.34    -0.65     0.62 1.00     8030     6691
+cor(tuneRFRMFall,tunelhslhMhlh)      0.01      0.33    -0.62     0.64 1.00     7847     6053
+cor(Intercept,tunelshlhMhlh)         0.08      0.31    -0.54     0.65 1.00    12483     5660
+cor(tunelhsllMhll,tunelshlhMhlh)     0.02      0.33    -0.62     0.65 1.00     9712     6651
+cor(tunelshllMhll,tunelshlhMhlh)    -0.02      0.33    -0.63     0.61 1.00     8266     6768
+cor(tuneRFRMFall,tunelshlhMhlh)      0.02      0.33    -0.62     0.64 1.00     5769     6442
+cor(tunelhslhMhlh,tunelshlhMhlh)     0.06      0.33    -0.59     0.67 1.00     6633     7240
 
 Regression Coefficients:
               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
@@ -3280,7 +3237,18 @@ Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sosdiss2<span class="sc">::</span><span class="fu">model_to_latex_switch</span>(si_mdl, <span class="st">&quot;siModelStat&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(si_mdl,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">&quot;bars_grouped&quot;</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">group =</span> <span class="st">&quot;tune&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ndraws =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data:image/png;base64,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" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sosdiss2<span class="sc">::</span><span class="fu">model_to_latex_switch</span>(si_mdl, <span class="st">&quot;siModelStat&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\ExplSyntaxOn
  \newboolean{found}
@@ -3304,24 +3272,24 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>PLOT_TUNE_ORDER <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hll&#39;</span>,<span class="st">&#39;lhsll&#39;</span>, <span class="st">&#39;lshll&#39;</span>,<span class="st">&#39;hlh&#39;</span>, <span class="st">&#39;lhslh&#39;</span>, <span class="st">&#39;lshlh&#39;</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>avg_si_plot <span class="ot">&lt;-</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  model_data <span class="sc">|&gt;</span> </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tune, condition) <span class="sc">|&gt;</span> </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">mean_se</span>(resp_yes)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tune =</span> <span class="fu">factor</span>(tune, <span class="at">levels =</span> PLOT_TUNE_ORDER)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tune, <span class="at">y =</span> y, <span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax)) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>() <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;H*LL&#39;</span>, <span class="st">&#39;LH*LL&#39;</span>, <span class="st">&#39;L*HLL&#39;</span>, </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&#39;H*LH&#39;</span>, <span class="st">&#39;LH*LH&#39;</span>, <span class="st">&#39;L*HLH&#39;</span>)) <span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tune&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg SI Rate&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">linewidth=</span>.<span class="dv">3</span>)) </span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>avg_si_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>PLOT_TUNE_ORDER <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;hll&#39;</span>,<span class="st">&#39;lhsll&#39;</span>, <span class="st">&#39;lshll&#39;</span>,<span class="st">&#39;hlh&#39;</span>, <span class="st">&#39;lhslh&#39;</span>, <span class="st">&#39;lshlh&#39;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>avg_si_plot <span class="ot">&lt;-</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  model_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(tune, condition) <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">mean_se</span>(resp_yes)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tune =</span> <span class="fu">factor</span>(tune, <span class="at">levels =</span> PLOT_TUNE_ORDER)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tune, <span class="at">y =</span> y, <span class="at">ymin =</span> ymin, <span class="at">ymax =</span> ymax)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>() <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&#39;H*LL&#39;</span>, <span class="st">&#39;LH*LL&#39;</span>, <span class="st">&#39;L*HLL&#39;</span>, </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&#39;H*LH&#39;</span>, <span class="st">&#39;LH*LH&#39;</span>, <span class="st">&#39;L*HLH&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tune&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Avg SI Rate&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">linewidth=</span>.<span class="dv">3</span>)) </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>avg_si_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3329,8 +3297,48 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(avg_si_plot, <span class="st">&quot;avg_si_plot&quot;</span>,<span class="at">rootdir =</span> <span class="st">&quot;Figures/&quot;</span>,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(avg_si_plot, <span class="st">&quot;avg_si_plot&quot;</span>,<span class="at">rootdir =</span> <span class="st">&quot;Figures/&quot;</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.4.0 (2024-04-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 22631)
+
+Matrix products: default
+
+
+locale:
+[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8    LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] ggdist_3.3.2            tidybayes_3.0.6         here_1.0.1              sosdiss2_0.1.0          rstan_2.35.0.9000       StanHeaders_2.35.0.9000 cmdstanr_0.8.1.9000    
+ [8] brms_2.21.6             Rcpp_1.0.12             contrastable_0.2.0      lubridate_1.9.3         forcats_1.0.0           stringr_1.5.1           dplyr_1.1.4            
+[15] purrr_1.0.2             readr_2.1.5             tidyr_1.3.1             tibble_3.2.1            ggplot2_3.5.1           tidyverse_2.0.0        
+
+loaded via a namespace (and not attached):
+ [1] svUnit_1.0.6          tidyselect_1.2.1      farver_2.1.2          loo_2.7.0.9000        fastmap_1.1.1         TH.data_1.1-2         tensorA_0.36.2.1      digest_0.6.35        
+ [9] estimability_1.5      timechange_0.3.0      lifecycle_1.0.4       survival_3.6-4        processx_3.8.4        magrittr_2.0.3        posterior_1.5.0.9000  compiler_4.4.0       
+[17] rlang_1.1.4           tools_4.4.0           utf8_1.2.4            yaml_2.3.8            knitr_1.46            labeling_0.4.3        bridgesampling_1.1-2  htmlwidgets_1.6.4    
+[25] pkgbuild_1.4.4        curl_5.2.1            plyr_1.8.9            multcomp_1.4-26       abind_1.4-5           withr_3.0.0           grid_4.4.0            stats4_4.4.0         
+[33] fansi_1.0.6           future_1.33.2         xtable_1.8-4          colorspace_2.1-0      inline_0.3.19         globals_0.16.3        emmeans_1.10.1        scales_1.3.0         
+[41] MASS_7.3-60.2         cli_3.6.2             mvtnorm_1.2-5         rmarkdown_2.26        generics_0.1.3        RcppParallel_5.1.7    rstudioapi_0.16.0     reshape2_1.4.4       
+[49] tzdb_0.4.0            splines_4.4.0         bayesplot_1.11.1.9000 parallel_4.4.0        matrixStats_1.3.0     vctrs_0.6.5           V8_4.4.2              Matrix_1.7-0         
+[57] sandwich_3.1-0        jsonlite_1.8.8        arrayhelpers_1.1-0    hms_1.1.3             listenv_0.9.1         parallelly_1.37.1     glue_1.7.0            codetools_0.2-20     
+[65] ps_1.7.6              distributional_0.4.0  stringi_1.8.3         gtable_0.3.5          QuickJSR_1.2.2        broom.mixed_0.2.9.5   munsell_0.5.1         furrr_0.3.1          
+[73] pillar_1.9.0          htmltools_0.5.8.1     Brobdingnag_1.2-9     R6_2.5.1              rprojroot_2.0.4       evaluate_0.23         lattice_0.22-6        backports_1.4.1      
+[81] broom_1.0.5           rstantools_2.4.0.9000 coda_0.19-4.1         gridExtra_2.3         nlme_3.1-164          checkmate_2.3.1       xfun_0.43             zoo_1.8-12           
+[89] pkgconfig_2.0.3      </code></pre>
+</div>
 </div>
 </section>
 

@@ -57,6 +57,7 @@ library(ggdist)       #
 library(ggnewscale)   # Plot scale helpers
 library(here)         # Directory management
 library(broom.mixed)
+options(keep.source = TRUE, width = 180)
 
 # pulled out of {sosdiss2}
 plot_posterior_rt_draws <- function(condition_difference_draws,
@@ -138,7 +139,7 @@ plot_posterior_rt_draws <- function(condition_difference_draws,
 Load the raw experimental data and lexical measures, processes the data to
 the final dataset fed to the model.
 
-```{r, message = FALSE}
+```{r load-data, message = FALSE}
 exp_data <- readRDS("Data/exp_data.rds")
 
 # Load the lexical measures
@@ -228,7 +229,7 @@ for the lower (hear cool see cold) condition. The interaction with condition
 shows how different a tune behaves in the higher condition compared to the
 lower condition.
 
-```{r fit-models}
+```{r fit-tune-models}
 base_critical_WKSLP <- 
   fit_generic_rt_model(bf(rt ~  center_log_freq + center_length + block + tune *condition +
                             (1+tune*condition|participant) + (1+tune*condition|item),
@@ -246,13 +247,19 @@ bmdl_simple <-
 loo_compare(bmdl_simple, base_critical_WKSLP)
 
 summary(base_critical_WKSLP)
+
+pp_check(base_critical_WKSLP, 
+         type = "dens_overlay_grouped", 
+         group = "tune", 
+         ndraws = 100)
+
 ```
 
 #### Model prediction plots
 
 Below we plot the posterior RT distributions.
 
-```{r}
+```{r plot-tune-model}
 # Data grid at covariate centers
 dg <- 
   sosdiss2::marginal_data_grid(model = base_critical_WKSLP,
@@ -292,7 +299,7 @@ save_plot(posterior_residrt_plot,
 
 Below we wrangle the data for the model using the HF16 items.
 
-```{r, message = FALSE}
+```{r setup-condition-model, message = FALSE}
 # Wrangle the dataset to use for modeling, including the HF16-adapted items
 alldata_contrasts <- list(tune ~ sum_code + "hll",
                           condition ~ helmert_code | c('lower-higher',
@@ -332,7 +339,7 @@ Below we fit the model for the condition-level predictions (ie without intonatio
 The HF16-adapted items are only recorded with a single tune (out of 6), so we
 don't include tune *and* random intercepts by item for that dataset.
 
-```{r}
+```{r fit-condition-models}
 # Set weak priors for the model
 alldata_priors <- 
   c(
@@ -361,11 +368,17 @@ alldata_mdl_notune2 <-
 loo_compare(alldata_mdl_notune, alldata_mdl_notune2)
 
 summary(alldata_mdl_notune2)
+
+
+pp_check(alldata_mdl_notune2, 
+         type = "dens_overlay_grouped", 
+         group = "condition", 
+         ndraws = 100)
 ```
 
 Make the barplot figure.
 
-```{r}
+```{r condition-barplot}
 datagrid_without_tunes <- 
   marginal_data_grid(model = alldata_mdl_notune2,
                      'condition',
@@ -411,7 +424,7 @@ save_plot(predicted_condition_rt_plot, "predicted_condition_RT",
 Inline statistics are reported using the latex commands created below, see
 https://tsostaricsblog.netlify.app/posts/latexswitch/ for more information.
 
-```{r}
+```{r inline-stats}
 suppressWarnings(
   broom.mixed::tidy(base_critical_WKSLP, 
                     effects = "fixed", 
@@ -428,5 +441,10 @@ suppressWarnings(
 sosdiss2::model_to_latex_switch(alldata_mdl_notune2,
                                 "conditionStat", 
                                 add_found_boolean = FALSE)
+```
+
+
+```{r session-info}
+sessionInfo()
 ```
 

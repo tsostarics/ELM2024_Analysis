@@ -25,12 +25,13 @@ library(sosdiss2)     # Shared project helpers
 library(here)         # Path handler
 library(tidybayes)    # Draws handler
 library(ggdist)       # Draws plotting
+options(keep.source = TRUE, width = 180)
 ```
 
 
 ## SI Model
 
-```{r}
+```{r fit-model}
 TUNE_ORDER <- c("hll", "lhsll", "lshll", "hlh", "lhslh", "lshlh")
 
 # Specify manual contrast matrix via hypothesis matrix
@@ -83,11 +84,17 @@ si_mdl <- (brm(resp_yes ~ tune + (1+tune|subj_id) + (1+tune|item),
 
 summary(si_mdl)
 
+pp_check(si_mdl,
+         type = "bars_grouped",
+         group = "tune",
+         ndraws = 100)
+
+
 sosdiss2::model_to_latex_switch(si_mdl, "siModelStat")
 ```
 
 
-```{r, message = FALSE}
+```{r empirical-plot, message = FALSE}
 PLOT_TUNE_ORDER <- c('hll','lhsll', 'lshll','hlh', 'lhslh', 'lshlh')
 
 avg_si_plot <-
@@ -109,5 +116,9 @@ avg_si_plot
 
 save_plot(avg_si_plot, "avg_si_plot",rootdir = "Figures/",
           width = 5, height = 5)
+```
+
+```{r session-info}
+sessionInfo()
 ```
 
