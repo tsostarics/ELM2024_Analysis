@@ -360,7 +360,7 @@ alldata_mdl_notune2 <-
 
 loo_compare(alldata_mdl_notune, alldata_mdl_notune2)
 
-summary_alldata_mdl_notune2
+summary(alldata_mdl_notune2)
 ```
 
 Make the barplot figure.

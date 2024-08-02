@@ -3309,37 +3309,572 @@ vertical-align: -.125em;
 base_critical_WKSLP    0.0       0.0 
 bmdl_simple         -162.1      25.4 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(base_critical_WKSLP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: lognormal 
+  Links: mu = identity; sigma = log 
+Formula: rt ~ center_log_freq + center_length + block + tune * condition + (1 + tune * condition | participant) + (1 + tune * condition | item) 
+         sigma ~ (1 | participant) + (1 | item)
+   Data: data (Number of observations: 3984) 
+  Draws: 4 chains, each with iter = 10000; warmup = 2000; thin = 2;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~item (Number of levels: 64) 
+                                                         Estimate Est.Error
+sd(Intercept)                                                0.07      0.01
+sd(tunehlh)                                                  0.01      0.01
+sd(tunelhslh)                                                0.01      0.01
+sd(tunelhsll)                                                0.01      0.01
+sd(tunelshlh)                                                0.01      0.01
+sd(tunelshll)                                                0.01      0.01
+sd(conditionhigher)                                          0.09      0.01
+sd(tunehlh:conditionhigher)                                  0.01      0.01
+sd(tunelhslh:conditionhigher)                                0.01      0.01
+sd(tunelhsll:conditionhigher)                                0.02      0.01
+sd(tunelshlh:conditionhigher)                                0.01      0.01
+sd(tunelshll:conditionhigher)                                0.01      0.01
+sd(sigma_Intercept)                                          0.08      0.02
+cor(Intercept,tunehlh)                                      -0.03      0.25
+cor(Intercept,tunelhslh)                                     0.02      0.25
+cor(tunehlh,tunelhslh)                                      -0.03      0.26
+cor(Intercept,tunelhsll)                                     0.00      0.24
+cor(tunehlh,tunelhsll)                                      -0.01      0.26
+cor(tunelhslh,tunelhsll)                                    -0.03      0.26
+cor(Intercept,tunelshlh)                                     0.05      0.24
+cor(tunehlh,tunelshlh)                                      -0.01      0.26
+cor(tunelhslh,tunelshlh)                                    -0.05      0.26
+cor(tunelhsll,tunelshlh)                                    -0.03      0.26
+cor(Intercept,tunelshll)                                    -0.14      0.23
+cor(tunehlh,tunelshll)                                       0.01      0.26
+cor(tunelhslh,tunelshll)                                    -0.01      0.26
+cor(tunelhsll,tunelshll)                                    -0.04      0.26
+cor(tunelshlh,tunelshll)                                    -0.01      0.26
+cor(Intercept,conditionhigher)                              -0.57      0.09
+cor(tunehlh,conditionhigher)                                -0.05      0.25
+cor(tunelhslh,conditionhigher)                               0.03      0.25
+cor(tunelhsll,conditionhigher)                              -0.01      0.24
+cor(tunelshlh,conditionhigher)                              -0.16      0.25
+cor(tunelshll,conditionhigher)                               0.01      0.23
+cor(Intercept,tunehlh:conditionhigher)                      -0.04      0.25
+cor(tunehlh,tunehlh:conditionhigher)                        -0.03      0.26
+cor(tunelhslh,tunehlh:conditionhigher)                      -0.04      0.26
+cor(tunelhsll,tunehlh:conditionhigher)                      -0.00      0.26
+cor(tunelshlh,tunehlh:conditionhigher)                      -0.02      0.26
+cor(tunelshll,tunehlh:conditionhigher)                       0.00      0.25
+cor(conditionhigher,tunehlh:conditionhigher)                -0.00      0.24
+cor(Intercept,tunelhslh:conditionhigher)                     0.02      0.25
+cor(tunehlh,tunelhslh:conditionhigher)                      -0.01      0.26
+cor(tunelhslh,tunelhslh:conditionhigher)                    -0.05      0.26
+cor(tunelhsll,tunelhslh:conditionhigher)                    -0.02      0.26
+cor(tunelshlh,tunelhslh:conditionhigher)                    -0.04      0.26
+cor(tunelshll,tunelhslh:conditionhigher)                    -0.00      0.26
+cor(conditionhigher,tunelhslh:conditionhigher)               0.06      0.26
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      -0.03      0.26
+cor(Intercept,tunelhsll:conditionhigher)                    -0.12      0.24
+cor(tunehlh,tunelhsll:conditionhigher)                      -0.00      0.26
+cor(tunelhslh,tunelhsll:conditionhigher)                    -0.04      0.26
+cor(tunelhsll,tunelhsll:conditionhigher)                    -0.04      0.26
+cor(tunelshlh,tunelhsll:conditionhigher)                    -0.04      0.25
+cor(tunelshll,tunelhsll:conditionhigher)                    -0.01      0.25
+cor(conditionhigher,tunelhsll:conditionhigher)               0.09      0.24
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      -0.02      0.26
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    -0.03      0.26
+cor(Intercept,tunelshlh:conditionhigher)                     0.02      0.25
+cor(tunehlh,tunelshlh:conditionhigher)                      -0.02      0.26
+cor(tunelhslh,tunelshlh:conditionhigher)                    -0.04      0.26
+cor(tunelhsll,tunelshlh:conditionhigher)                    -0.04      0.26
+cor(tunelshlh,tunelshlh:conditionhigher)                    -0.06      0.26
+cor(tunelshll,tunelshlh:conditionhigher)                    -0.02      0.26
+cor(conditionhigher,tunelshlh:conditionhigher)              -0.03      0.25
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      -0.03      0.26
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    -0.03      0.26
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    -0.05      0.26
+cor(Intercept,tunelshll:conditionhigher)                    -0.01      0.25
+cor(tunehlh,tunelshll:conditionhigher)                      -0.01      0.26
+cor(tunelhslh,tunelshll:conditionhigher)                    -0.01      0.26
+cor(tunelhsll,tunelshll:conditionhigher)                    -0.02      0.26
+cor(tunelshlh,tunelshll:conditionhigher)                    -0.02      0.26
+cor(tunelshll,tunelshll:conditionhigher)                    -0.05      0.26
+cor(conditionhigher,tunelshll:conditionhigher)               0.00      0.25
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      -0.02      0.26
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    -0.01      0.26
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    -0.04      0.26
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    -0.02      0.26
+                                                         l-95% CI u-95% CI Rhat
+sd(Intercept)                                                0.05     0.08 1.00
+sd(tunehlh)                                                  0.00     0.02 1.00
+sd(tunelhslh)                                                0.00     0.03 1.00
+sd(tunelhsll)                                                0.00     0.03 1.00
+sd(tunelshlh)                                                0.00     0.03 1.00
+sd(tunelshll)                                                0.00     0.03 1.00
+sd(conditionhigher)                                          0.08     0.11 1.00
+sd(tunehlh:conditionhigher)                                  0.00     0.04 1.00
+sd(tunelhslh:conditionhigher)                                0.00     0.03 1.00
+sd(tunelhsll:conditionhigher)                                0.00     0.04 1.00
+sd(tunelshlh:conditionhigher)                                0.00     0.03 1.00
+sd(tunelshll:conditionhigher)                                0.00     0.03 1.00
+sd(sigma_Intercept)                                          0.04     0.12 1.00
+cor(Intercept,tunehlh)                                      -0.51     0.47 1.00
+cor(Intercept,tunelhslh)                                    -0.47     0.49 1.00
+cor(tunehlh,tunelhslh)                                      -0.52     0.47 1.00
+cor(Intercept,tunelhsll)                                    -0.47     0.47 1.00
+cor(tunehlh,tunelhsll)                                      -0.51     0.48 1.00
+cor(tunelhslh,tunelhsll)                                    -0.53     0.47 1.00
+cor(Intercept,tunelshlh)                                    -0.44     0.51 1.00
+cor(tunehlh,tunelshlh)                                      -0.52     0.49 1.00
+cor(tunelhslh,tunelshlh)                                    -0.54     0.46 1.00
+cor(tunelhsll,tunelshlh)                                    -0.51     0.47 1.00
+cor(Intercept,tunelshll)                                    -0.56     0.35 1.00
+cor(tunehlh,tunelshll)                                      -0.49     0.51 1.00
+cor(tunelhslh,tunelshll)                                    -0.50     0.49 1.00
+cor(tunelhsll,tunelshll)                                    -0.52     0.47 1.00
+cor(tunelshlh,tunelshll)                                    -0.50     0.49 1.00
+cor(Intercept,conditionhigher)                              -0.73    -0.37 1.00
+cor(tunehlh,conditionhigher)                                -0.52     0.44 1.00
+cor(tunelhslh,conditionhigher)                              -0.45     0.50 1.00
+cor(tunelhsll,conditionhigher)                              -0.48     0.46 1.00
+cor(tunelshlh,conditionhigher)                              -0.60     0.35 1.00
+cor(tunelshll,conditionhigher)                              -0.44     0.46 1.00
+cor(Intercept,tunehlh:conditionhigher)                      -0.51     0.44 1.00
+cor(tunehlh,tunehlh:conditionhigher)                        -0.53     0.47 1.00
+cor(tunelhslh,tunehlh:conditionhigher)                      -0.54     0.47 1.00
+cor(tunelhsll,tunehlh:conditionhigher)                      -0.50     0.49 1.00
+cor(tunelshlh,tunehlh:conditionhigher)                      -0.52     0.48 1.00
+cor(tunelshll,tunehlh:conditionhigher)                      -0.49     0.50 1.00
+cor(conditionhigher,tunehlh:conditionhigher)                -0.47     0.47 1.00
+cor(Intercept,tunelhslh:conditionhigher)                    -0.47     0.50 1.00
+cor(tunehlh,tunelhslh:conditionhigher)                      -0.52     0.49 1.00
+cor(tunelhslh,tunelhslh:conditionhigher)                    -0.54     0.47 1.00
+cor(tunelhsll,tunelhslh:conditionhigher)                    -0.51     0.48 1.00
+cor(tunelshlh,tunelhslh:conditionhigher)                    -0.53     0.47 1.00
+cor(tunelshll,tunelhslh:conditionhigher)                    -0.49     0.49 1.00
+cor(conditionhigher,tunelhslh:conditionhigher)              -0.44     0.54 1.00
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      -0.52     0.48 1.00
+cor(Intercept,tunelhsll:conditionhigher)                    -0.56     0.36 1.00
+cor(tunehlh,tunelhsll:conditionhigher)                      -0.49     0.50 1.00
+cor(tunelhslh,tunelhsll:conditionhigher)                    -0.53     0.47 1.00
+cor(tunelhsll,tunelhsll:conditionhigher)                    -0.54     0.47 1.00
+cor(tunelshlh,tunelhsll:conditionhigher)                    -0.52     0.45 1.00
+cor(tunelshll,tunelhsll:conditionhigher)                    -0.50     0.48 1.00
+cor(conditionhigher,tunelhsll:conditionhigher)              -0.40     0.53 1.00
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      -0.51     0.47 1.00
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    -0.52     0.48 1.00
+cor(Intercept,tunelshlh:conditionhigher)                    -0.46     0.50 1.00
+cor(tunehlh,tunelshlh:conditionhigher)                      -0.51     0.48 1.00
+cor(tunelhslh,tunelshlh:conditionhigher)                    -0.53     0.46 1.00
+cor(tunelhsll,tunelshlh:conditionhigher)                    -0.53     0.47 1.00
+cor(tunelshlh,tunelshlh:conditionhigher)                    -0.56     0.45 1.00
+cor(tunelshll,tunelshlh:conditionhigher)                    -0.51     0.47 1.00
+cor(conditionhigher,tunelshlh:conditionhigher)              -0.50     0.46 1.00
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      -0.53     0.47 1.00
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    -0.52     0.48 1.00
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    -0.54     0.46 1.00
+cor(Intercept,tunelshll:conditionhigher)                    -0.50     0.47 1.00
+cor(tunehlh,tunelshll:conditionhigher)                      -0.51     0.49 1.00
+cor(tunelhslh,tunelshll:conditionhigher)                    -0.50     0.49 1.00
+cor(tunelhsll,tunelshll:conditionhigher)                    -0.52     0.48 1.00
+cor(tunelshlh,tunelshll:conditionhigher)                    -0.51     0.48 1.00
+cor(tunelshll,tunelshll:conditionhigher)                    -0.55     0.47 1.00
+cor(conditionhigher,tunelshll:conditionhigher)              -0.48     0.49 1.00
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      -0.51     0.48 1.00
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    -0.51     0.50 1.00
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    -0.54     0.47 1.00
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    -0.51     0.48 1.00
+                                                         Bulk_ESS Tail_ESS
+sd(Intercept)                                                9527    13107
+sd(tunehlh)                                                 10151    11946
+sd(tunelhslh)                                               10119    12531
+sd(tunelhsll)                                               10187    12414
+sd(tunelshlh)                                                8379    11749
+sd(tunelshll)                                                7261    10843
+sd(conditionhigher)                                         10795    14209
+sd(tunehlh:conditionhigher)                                  9769    10741
+sd(tunelhslh:conditionhigher)                               11965    12490
+sd(tunelhsll:conditionhigher)                                8417    11383
+sd(tunelshlh:conditionhigher)                               10238    11510
+sd(tunelshll:conditionhigher)                               10864    12052
+sd(sigma_Intercept)                                          8942    10321
+cor(Intercept,tunehlh)                                      12978    13059
+cor(Intercept,tunelhslh)                                    12677    13766
+cor(tunehlh,tunelhslh)                                      13295    13695
+cor(Intercept,tunelhsll)                                    12253    13721
+cor(tunehlh,tunelhsll)                                      13338    13893
+cor(tunelhslh,tunelhsll)                                    12652    13975
+cor(Intercept,tunelshlh)                                    12428    12937
+cor(tunehlh,tunelshlh)                                      12423    13236
+cor(tunelhslh,tunelshlh)                                    12996    14076
+cor(tunelhsll,tunelshlh)                                    12939    13932
+cor(Intercept,tunelshll)                                    12592    13345
+cor(tunehlh,tunelshll)                                      13020    13815
+cor(tunelhslh,tunelshll)                                    12751    14098
+cor(tunelhsll,tunelshll)                                    13189    14404
+cor(tunelshlh,tunelshll)                                    12679    14240
+cor(Intercept,conditionhigher)                              11620    14664
+cor(tunehlh,conditionhigher)                                 5199     8887
+cor(tunelhslh,conditionhigher)                               5351    10012
+cor(tunelhsll,conditionhigher)                               5708     9464
+cor(tunelshlh,conditionhigher)                               5517    10445
+cor(tunelshll,conditionhigher)                               6867    11248
+cor(Intercept,tunehlh:conditionhigher)                      13384    13321
+cor(tunehlh,tunehlh:conditionhigher)                        13115    12882
+cor(tunelhslh,tunehlh:conditionhigher)                      12474    13984
+cor(tunelhsll,tunehlh:conditionhigher)                      12956    14618
+cor(tunelshlh,tunehlh:conditionhigher)                      13563    13195
+cor(tunelshll,tunehlh:conditionhigher)                      13514    14461
+cor(conditionhigher,tunehlh:conditionhigher)                14024    14098
+cor(Intercept,tunelhslh:conditionhigher)                    12807    13224
+cor(tunehlh,tunelhslh:conditionhigher)                      12079    12938
+cor(tunelhslh,tunelhslh:conditionhigher)                    12689    13137
+cor(tunelhsll,tunelhslh:conditionhigher)                    12920    13239
+cor(tunelshlh,tunelhslh:conditionhigher)                    13124    14176
+cor(tunelshll,tunelhslh:conditionhigher)                    13366    13987
+cor(conditionhigher,tunelhslh:conditionhigher)              13443    14096
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      13062    14841
+cor(Intercept,tunelhsll:conditionhigher)                    13145    13511
+cor(tunehlh,tunelhsll:conditionhigher)                      13255    14269
+cor(tunelhslh,tunelhsll:conditionhigher)                    13066    14090
+cor(tunelhsll,tunelhsll:conditionhigher)                    13419    14135
+cor(tunelshlh,tunelhsll:conditionhigher)                    12885    14108
+cor(tunelshll,tunelhsll:conditionhigher)                    14102    15212
+cor(conditionhigher,tunelhsll:conditionhigher)              13342    13665
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      12953    15029
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    13596    14724
+cor(Intercept,tunelshlh:conditionhigher)                    12766    12883
+cor(tunehlh,tunelshlh:conditionhigher)                      13449    13936
+cor(tunelhslh,tunelshlh:conditionhigher)                    13124    14010
+cor(tunelhsll,tunelshlh:conditionhigher)                    12746    13902
+cor(tunelshlh,tunelshlh:conditionhigher)                    12714    14105
+cor(tunelshll,tunelshlh:conditionhigher)                    13093    14705
+cor(conditionhigher,tunelshlh:conditionhigher)              13286    13875
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      12628    13822
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    12963    14686
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    12843    13863
+cor(Intercept,tunelshll:conditionhigher)                    12429    13121
+cor(tunehlh,tunelshll:conditionhigher)                      13311    13382
+cor(tunelhslh,tunelshll:conditionhigher)                    13270    14104
+cor(tunelhsll,tunelshll:conditionhigher)                    12762    14325
+cor(tunelshlh,tunelshll:conditionhigher)                    12768    13568
+cor(tunelshll,tunelshll:conditionhigher)                    13514    14216
+cor(conditionhigher,tunelshll:conditionhigher)              13443    13730
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      13381    14770
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    12660    14151
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    12929    14191
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    12877    14720
+
+~participant (Number of levels: 63) 
+                                                         Estimate Est.Error
+sd(Intercept)                                                0.13      0.01
+sd(tunehlh)                                                  0.01      0.01
+sd(tunelhslh)                                                0.01      0.01
+sd(tunelhsll)                                                0.01      0.01
+sd(tunelshlh)                                                0.01      0.01
+sd(tunelshll)                                                0.01      0.01
+sd(conditionhigher)                                          0.01      0.01
+sd(tunehlh:conditionhigher)                                  0.02      0.01
+sd(tunelhslh:conditionhigher)                                0.02      0.01
+sd(tunelhsll:conditionhigher)                                0.02      0.01
+sd(tunelshlh:conditionhigher)                                0.01      0.01
+sd(tunelshll:conditionhigher)                                0.01      0.01
+sd(sigma_Intercept)                                          0.24      0.03
+cor(Intercept,tunehlh)                                       0.04      0.24
+cor(Intercept,tunelhslh)                                    -0.01      0.25
+cor(tunehlh,tunelhslh)                                      -0.02      0.25
+cor(Intercept,tunelhsll)                                    -0.02      0.24
+cor(tunehlh,tunelhsll)                                      -0.01      0.26
+cor(tunelhslh,tunelhsll)                                     0.00      0.26
+cor(Intercept,tunelshlh)                                     0.04      0.24
+cor(tunehlh,tunelshlh)                                      -0.03      0.26
+cor(tunelhslh,tunelshlh)                                    -0.02      0.26
+cor(tunelhsll,tunelshlh)                                    -0.03      0.26
+cor(Intercept,tunelshll)                                     0.04      0.25
+cor(tunehlh,tunelshll)                                      -0.02      0.26
+cor(tunelhslh,tunelshll)                                    -0.01      0.26
+cor(tunelhsll,tunelshll)                                    -0.02      0.26
+cor(tunelshlh,tunelshll)                                    -0.02      0.26
+cor(Intercept,conditionhigher)                              -0.07      0.23
+cor(tunehlh,conditionhigher)                                 0.04      0.26
+cor(tunelhslh,conditionhigher)                               0.00      0.26
+cor(tunelhsll,conditionhigher)                              -0.00      0.26
+cor(tunelshlh,conditionhigher)                              -0.03      0.26
+cor(tunelshll,conditionhigher)                              -0.02      0.25
+cor(Intercept,tunehlh:conditionhigher)                      -0.03      0.23
+cor(tunehlh,tunehlh:conditionhigher)                        -0.03      0.26
+cor(tunelhslh,tunehlh:conditionhigher)                      -0.01      0.26
+cor(tunelhsll,tunehlh:conditionhigher)                      -0.02      0.26
+cor(tunelshlh,tunehlh:conditionhigher)                      -0.04      0.26
+cor(tunelshll,tunehlh:conditionhigher)                      -0.00      0.26
+cor(conditionhigher,tunehlh:conditionhigher)                -0.00      0.26
+cor(Intercept,tunelhslh:conditionhigher)                    -0.14      0.23
+cor(tunehlh,tunelhslh:conditionhigher)                      -0.03      0.26
+cor(tunelhslh,tunelhslh:conditionhigher)                    -0.04      0.26
+cor(tunelhsll,tunelhslh:conditionhigher)                    -0.00      0.26
+cor(tunelshlh,tunelhslh:conditionhigher)                    -0.03      0.26
+cor(tunelshll,tunelhslh:conditionhigher)                    -0.02      0.26
+cor(conditionhigher,tunelhslh:conditionhigher)               0.00      0.25
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      -0.09      0.27
+cor(Intercept,tunelhsll:conditionhigher)                    -0.04      0.24
+cor(tunehlh,tunelhsll:conditionhigher)                       0.00      0.26
+cor(tunelhslh,tunelhsll:conditionhigher)                     0.01      0.26
+cor(tunelhsll,tunelhsll:conditionhigher)                    -0.02      0.26
+cor(tunelshlh,tunelhsll:conditionhigher)                    -0.00      0.26
+cor(tunelshll,tunelhsll:conditionhigher)                    -0.02      0.26
+cor(conditionhigher,tunelhsll:conditionhigher)              -0.03      0.26
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      -0.04      0.26
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    -0.04      0.26
+cor(Intercept,tunelshlh:conditionhigher)                    -0.08      0.25
+cor(tunehlh,tunelshlh:conditionhigher)                      -0.02      0.26
+cor(tunelhslh,tunelshlh:conditionhigher)                    -0.00      0.26
+cor(tunelhsll,tunelshlh:conditionhigher)                    -0.01      0.26
+cor(tunelshlh,tunelshlh:conditionhigher)                    -0.04      0.26
+cor(tunelshll,tunelshlh:conditionhigher)                    -0.00      0.26
+cor(conditionhigher,tunelshlh:conditionhigher)               0.00      0.26
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      -0.03      0.26
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    -0.02      0.26
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    -0.02      0.26
+cor(Intercept,tunelshll:conditionhigher)                    -0.06      0.25
+cor(tunehlh,tunelshll:conditionhigher)                      -0.01      0.26
+cor(tunelhslh,tunelshll:conditionhigher)                    -0.01      0.26
+cor(tunelhsll,tunelshll:conditionhigher)                    -0.02      0.26
+cor(tunelshlh,tunelshll:conditionhigher)                     0.00      0.26
+cor(tunelshll,tunelshll:conditionhigher)                    -0.04      0.26
+cor(conditionhigher,tunelshll:conditionhigher)              -0.01      0.26
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      -0.01      0.26
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    -0.03      0.26
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    -0.04      0.26
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    -0.00      0.26
+                                                         l-95% CI u-95% CI Rhat
+sd(Intercept)                                                0.11     0.16 1.00
+sd(tunehlh)                                                  0.00     0.03 1.00
+sd(tunelhslh)                                                0.00     0.02 1.00
+sd(tunelhsll)                                                0.00     0.02 1.00
+sd(tunelshlh)                                                0.00     0.03 1.00
+sd(tunelshll)                                                0.00     0.02 1.00
+sd(conditionhigher)                                          0.00     0.03 1.00
+sd(tunehlh:conditionhigher)                                  0.00     0.05 1.00
+sd(tunelhslh:conditionhigher)                                0.00     0.05 1.00
+sd(tunelhsll:conditionhigher)                                0.00     0.04 1.00
+sd(tunelshlh:conditionhigher)                                0.00     0.03 1.00
+sd(tunelshll:conditionhigher)                                0.00     0.03 1.00
+sd(sigma_Intercept)                                          0.20     0.30 1.00
+cor(Intercept,tunehlh)                                      -0.43     0.50 1.00
+cor(Intercept,tunelhslh)                                    -0.48     0.48 1.00
+cor(tunehlh,tunelhslh)                                      -0.50     0.47 1.00
+cor(Intercept,tunelhsll)                                    -0.50     0.46 1.00
+cor(tunehlh,tunelhsll)                                      -0.50     0.48 1.00
+cor(tunelhslh,tunelhsll)                                    -0.50     0.49 1.00
+cor(Intercept,tunelshlh)                                    -0.43     0.51 1.00
+cor(tunehlh,tunelshlh)                                      -0.52     0.48 1.00
+cor(tunelhslh,tunelshlh)                                    -0.51     0.49 1.00
+cor(tunelhsll,tunelshlh)                                    -0.53     0.48 1.00
+cor(Intercept,tunelshll)                                    -0.45     0.51 1.00
+cor(tunehlh,tunelshll)                                      -0.52     0.48 1.00
+cor(tunelhslh,tunelshll)                                    -0.50     0.49 1.00
+cor(tunelhsll,tunelshll)                                    -0.51     0.49 1.00
+cor(tunelshlh,tunelshll)                                    -0.51     0.48 1.00
+cor(Intercept,conditionhigher)                              -0.51     0.40 1.00
+cor(tunehlh,conditionhigher)                                -0.47     0.53 1.00
+cor(tunelhslh,conditionhigher)                              -0.49     0.49 1.00
+cor(tunelhsll,conditionhigher)                              -0.50     0.49 1.00
+cor(tunelshlh,conditionhigher)                              -0.52     0.48 1.00
+cor(tunelshll,conditionhigher)                              -0.50     0.47 1.00
+cor(Intercept,tunehlh:conditionhigher)                      -0.47     0.43 1.00
+cor(tunehlh,tunehlh:conditionhigher)                        -0.52     0.47 1.00
+cor(tunelhslh,tunehlh:conditionhigher)                      -0.50     0.48 1.00
+cor(tunelhsll,tunehlh:conditionhigher)                      -0.51     0.48 1.00
+cor(tunelshlh,tunehlh:conditionhigher)                      -0.53     0.47 1.00
+cor(tunelshll,tunehlh:conditionhigher)                      -0.49     0.49 1.00
+cor(conditionhigher,tunehlh:conditionhigher)                -0.49     0.49 1.00
+cor(Intercept,tunelhslh:conditionhigher)                    -0.56     0.33 1.00
+cor(tunehlh,tunelhslh:conditionhigher)                      -0.52     0.47 1.00
+cor(tunelhslh,tunelhslh:conditionhigher)                    -0.54     0.47 1.00
+cor(tunelhsll,tunelhslh:conditionhigher)                    -0.49     0.50 1.00
+cor(tunelshlh,tunelhslh:conditionhigher)                    -0.52     0.48 1.00
+cor(tunelshll,tunelhslh:conditionhigher)                    -0.51     0.48 1.00
+cor(conditionhigher,tunelhslh:conditionhigher)              -0.49     0.49 1.00
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      -0.58     0.44 1.00
+cor(Intercept,tunelhsll:conditionhigher)                    -0.50     0.43 1.00
+cor(tunehlh,tunelhsll:conditionhigher)                      -0.50     0.50 1.00
+cor(tunelhslh,tunelhsll:conditionhigher)                    -0.48     0.52 1.00
+cor(tunelhsll,tunelhsll:conditionhigher)                    -0.52     0.48 1.00
+cor(tunelshlh,tunelhsll:conditionhigher)                    -0.50     0.49 1.00
+cor(tunelshll,tunelhsll:conditionhigher)                    -0.51     0.48 1.00
+cor(conditionhigher,tunelhsll:conditionhigher)              -0.52     0.47 1.00
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      -0.53     0.47 1.00
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    -0.54     0.47 1.00
+cor(Intercept,tunelshlh:conditionhigher)                    -0.55     0.42 1.00
+cor(tunehlh,tunelshlh:conditionhigher)                      -0.51     0.49 1.00
+cor(tunelhslh,tunelshlh:conditionhigher)                    -0.49     0.49 1.00
+cor(tunelhsll,tunelshlh:conditionhigher)                    -0.50     0.49 1.00
+cor(tunelshlh,tunelshlh:conditionhigher)                    -0.53     0.47 1.00
+cor(tunelshll,tunelshlh:conditionhigher)                    -0.50     0.49 1.00
+cor(conditionhigher,tunelshlh:conditionhigher)              -0.49     0.50 1.00
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      -0.52     0.47 1.00
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    -0.52     0.48 1.00
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    -0.52     0.49 1.00
+cor(Intercept,tunelshll:conditionhigher)                    -0.53     0.43 1.00
+cor(tunehlh,tunelshll:conditionhigher)                      -0.50     0.49 1.00
+cor(tunelhslh,tunelshll:conditionhigher)                    -0.51     0.49 1.00
+cor(tunelhsll,tunelshll:conditionhigher)                    -0.51     0.48 1.00
+cor(tunelshlh,tunelshll:conditionhigher)                    -0.50     0.49 1.00
+cor(tunelshll,tunelshll:conditionhigher)                    -0.53     0.46 1.00
+cor(conditionhigher,tunelshll:conditionhigher)              -0.51     0.48 1.00
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      -0.51     0.49 1.00
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    -0.53     0.47 1.00
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    -0.53     0.47 1.00
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    -0.50     0.49 1.00
+                                                         Bulk_ESS Tail_ESS
+sd(Intercept)                                                5238     8379
+sd(tunehlh)                                                  9324    11183
+sd(tunelhslh)                                               11733    11130
+sd(tunelhsll)                                               10989    12807
+sd(tunelshlh)                                               10748    11820
+sd(tunelshll)                                               10808    13220
+sd(conditionhigher)                                          7345    11725
+sd(tunehlh:conditionhigher)                                  8811    11441
+sd(tunelhslh:conditionhigher)                                8254    11544
+sd(tunelhsll:conditionhigher)                               10259    12408
+sd(tunelshlh:conditionhigher)                               10549    12756
+sd(tunelshll:conditionhigher)                               10914    12180
+sd(sigma_Intercept)                                          9272    11658
+cor(Intercept,tunehlh)                                      12687    13726
+cor(Intercept,tunelhslh)                                    12777    12709
+cor(tunehlh,tunelhslh)                                      12787    13778
+cor(Intercept,tunelhsll)                                    12488    12859
+cor(tunehlh,tunelhsll)                                      13380    13005
+cor(tunelhslh,tunelhsll)                                    12887    13238
+cor(Intercept,tunelshlh)                                    12851    12151
+cor(tunehlh,tunelshlh)                                      13350    14055
+cor(tunelhslh,tunelshlh)                                    13056    13999
+cor(tunelhsll,tunelshlh)                                    12628    13742
+cor(Intercept,tunelshll)                                    12905    13297
+cor(tunehlh,tunelshll)                                      12727    13999
+cor(tunelhslh,tunelshll)                                    12392    13715
+cor(tunelhsll,tunelshll)                                    13475    13796
+cor(tunelshlh,tunelshll)                                    13373    14354
+cor(Intercept,conditionhigher)                              12812    12549
+cor(tunehlh,conditionhigher)                                13336    14216
+cor(tunelhslh,conditionhigher)                              12907    14140
+cor(tunelhsll,conditionhigher)                              13020    13716
+cor(tunelshlh,conditionhigher)                              12909    14169
+cor(tunelshll,conditionhigher)                              12785    13048
+cor(Intercept,tunehlh:conditionhigher)                      12531    12994
+cor(tunehlh,tunehlh:conditionhigher)                        12883    14056
+cor(tunelhslh,tunehlh:conditionhigher)                      13468    13908
+cor(tunelhsll,tunehlh:conditionhigher)                      13706    14579
+cor(tunelshlh,tunehlh:conditionhigher)                      12681    14221
+cor(tunelshll,tunehlh:conditionhigher)                      13979    14794
+cor(conditionhigher,tunehlh:conditionhigher)                13816    14314
+cor(Intercept,tunelhslh:conditionhigher)                    13122    13381
+cor(tunehlh,tunelhslh:conditionhigher)                      12707    13765
+cor(tunelhslh,tunelhslh:conditionhigher)                    12806    13702
+cor(tunelhsll,tunelhslh:conditionhigher)                    13063    14365
+cor(tunelshlh,tunelhslh:conditionhigher)                    13786    14536
+cor(tunelshll,tunelhslh:conditionhigher)                    12536    14142
+cor(conditionhigher,tunelhslh:conditionhigher)              13375    14382
+cor(tunehlh:conditionhigher,tunelhslh:conditionhigher)      12721    14117
+cor(Intercept,tunelhsll:conditionhigher)                    12222    12332
+cor(tunehlh,tunelhsll:conditionhigher)                      13484    13753
+cor(tunelhslh,tunelhsll:conditionhigher)                    13136    14040
+cor(tunelhsll,tunelhsll:conditionhigher)                    12829    14102
+cor(tunelshlh,tunelhsll:conditionhigher)                    13508    14423
+cor(tunelshll,tunelhsll:conditionhigher)                    13122    14608
+cor(conditionhigher,tunelhsll:conditionhigher)              13887    14711
+cor(tunehlh:conditionhigher,tunelhsll:conditionhigher)      13386    15058
+cor(tunelhslh:conditionhigher,tunelhsll:conditionhigher)    13085    14968
+cor(Intercept,tunelshlh:conditionhigher)                    13099    12580
+cor(tunehlh,tunelshlh:conditionhigher)                      13187    13529
+cor(tunelhslh,tunelshlh:conditionhigher)                    13092    14123
+cor(tunelhsll,tunelshlh:conditionhigher)                    12352    13421
+cor(tunelshlh,tunelshlh:conditionhigher)                    13003    14229
+cor(tunelshll,tunelshlh:conditionhigher)                    13861    13627
+cor(conditionhigher,tunelshlh:conditionhigher)              13109    14792
+cor(tunehlh:conditionhigher,tunelshlh:conditionhigher)      13375    14770
+cor(tunelhslh:conditionhigher,tunelshlh:conditionhigher)    13670    14766
+cor(tunelhsll:conditionhigher,tunelshlh:conditionhigher)    13634    14905
+cor(Intercept,tunelshll:conditionhigher)                    12952    13621
+cor(tunehlh,tunelshll:conditionhigher)                      12408    12700
+cor(tunelhslh,tunelshll:conditionhigher)                    13423    14123
+cor(tunelhsll,tunelshll:conditionhigher)                    12839    13423
+cor(tunelshlh,tunelshll:conditionhigher)                    13146    13970
+cor(tunelshll,tunelshll:conditionhigher)                    13211    13972
+cor(conditionhigher,tunelshll:conditionhigher)              13952    14770
+cor(tunehlh:conditionhigher,tunelshll:conditionhigher)      12705    14827
+cor(tunelhslh:conditionhigher,tunelshll:conditionhigher)    12804    13204
+cor(tunelhsll:conditionhigher,tunelshll:conditionhigher)    13309    14691
+cor(tunelshlh:conditionhigher,tunelshll:conditionhigher)    13062    14893
+
+Regression Coefficients:
+                          Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+Intercept                     6.22      0.02     6.18     6.25 1.00     3393
+sigma_Intercept              -1.73      0.03    -1.80    -1.67 1.00     7100
+center_log_freq              -0.03      0.00    -0.04    -0.02 1.00    10731
+center_length                 0.01      0.00     0.00     0.02 1.00    10493
+block                        -0.01      0.00    -0.02    -0.01 1.00    13756
+tunehlh                      -0.02      0.01    -0.03    -0.00 1.00    13301
+tunelhslh                     0.00      0.01    -0.01     0.02 1.00    13485
+tunelhsll                    -0.01      0.01    -0.02     0.01 1.00    13547
+tunelshlh                     0.02      0.01     0.00     0.04 1.00    13289
+tunelshll                     0.00      0.01    -0.01     0.02 1.00    12842
+conditionhigher               0.01      0.01    -0.02     0.03 1.00    12856
+tunehlh:conditionhigher       0.02      0.01    -0.00     0.04 1.00    13389
+tunelhslh:conditionhigher    -0.00      0.01    -0.03     0.02 1.00    13835
+tunelhsll:conditionhigher     0.01      0.01    -0.01     0.03 1.00    13502
+tunelshlh:conditionhigher    -0.02      0.01    -0.04     0.00 1.00    13362
+tunelshll:conditionhigher    -0.01      0.01    -0.03     0.02 1.00    13023
+                          Tail_ESS
+Intercept                     6323
+sigma_Intercept              10769
+center_log_freq              11824
+center_length                13196
+block                        14007
+tunehlh                      13982
+tunelhslh                    13883
+tunelhsll                    12621
+tunelshlh                    14160
+tunelshll                    13666
+conditionhigher              14818
+tunehlh:conditionhigher      13462
+tunelhslh:conditionhigher    14397
+tunelhsll:conditionhigher    13790
+tunelshlh:conditionhigher    14145
+tunelshll:conditionhigher    13516
+
+Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
 </div>
 <section id="model-prediction-plots" class="level4">
 <h4 class="anchored" data-anchor-id="model-prediction-plots">Model prediction plots</h4>
 <p>Below we plot the posterior RT distributions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data grid at covariate centers</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dg <span class="ot">&lt;-</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">marginal_data_grid</span>(<span class="at">model =</span> base_critical_WKSLP,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;tune&#39;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;condition&#39;</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">center_log_freq =</span> <span class="dv">0</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">center_length =</span> <span class="dv">0</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">block =</span> <span class="dv">0</span>) </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>condition_difference_draws <span class="ot">&lt;-</span> </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">get_condition_difference_draws</span>(base_critical_WKSLP, dg,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">TUNE_ORDER =</span> <span class="fu">c</span>(<span class="st">&quot;hll&quot;</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lhsll&quot;</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lshll&quot;</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;hlh&quot;</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lhslh&quot;</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lshlh&quot;</span>))</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>posterior_residrt_plot <span class="ot">&lt;-</span> </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_posterior_rt_draws</span>(condition_difference_draws,</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">slab_scale =</span> .<span class="dv">5</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">facet_labels =</span> <span class="fu">c</span>(<span class="at">higher=</span><span class="st">&quot;LowerTarget&quot;</span>,</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">lower=</span><span class="st">&quot;HigherTarget&quot;</span>)) <span class="sc">+</span> </span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">05</span>, .<span class="dv">05</span>))<span class="sc">+</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;H*&quot;</span>, <span class="st">&quot;LH*</span><span class="sc">\n</span><span class="st">L-L%&quot;</span>, <span class="st">&quot;L*H&quot;</span>, <span class="st">&quot;H*&quot;</span>, <span class="st">&quot;LH*</span><span class="sc">\n</span><span class="st">L-H%&quot;</span>, <span class="st">&quot;L*H&quot;</span>))</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>posterior_residrt_plot <span class="co"># x axis to be fixed up manually outside of R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data grid at covariate centers</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dg <span class="ot">&lt;-</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">marginal_data_grid</span>(<span class="at">model =</span> base_critical_WKSLP,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;tune&#39;</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">&#39;condition&#39;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">center_log_freq =</span> <span class="dv">0</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                               <span class="at">center_length =</span> <span class="dv">0</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                               <span class="at">block =</span> <span class="dv">0</span>) </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>condition_difference_draws <span class="ot">&lt;-</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">get_condition_difference_draws</span>(base_critical_WKSLP, dg,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">TUNE_ORDER =</span> <span class="fu">c</span>(<span class="st">&quot;hll&quot;</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lhsll&quot;</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lshll&quot;</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;hlh&quot;</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lhslh&quot;</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                                                          <span class="st">&quot;lshlh&quot;</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>posterior_residrt_plot <span class="ot">&lt;-</span> </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_posterior_rt_draws</span>(condition_difference_draws,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">slab_scale =</span> .<span class="dv">5</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">facet_labels =</span> <span class="fu">c</span>(<span class="at">higher=</span><span class="st">&quot;LowerTarget&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">lower=</span><span class="st">&quot;HigherTarget&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(), <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">05</span>, .<span class="dv">05</span>))<span class="sc">+</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;H*&quot;</span>, <span class="st">&quot;LH*</span><span class="sc">\n</span><span class="st">L-L%&quot;</span>, <span class="st">&quot;L*H&quot;</span>, <span class="st">&quot;H*&quot;</span>, <span class="st">&quot;LH*</span><span class="sc">\n</span><span class="st">L-H%&quot;</span>, <span class="st">&quot;L*H&quot;</span>))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>posterior_residrt_plot <span class="co"># x axis to be fixed up manually outside of R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3347,11 +3882,11 @@ bmdl_simple         -162.1      25.4 </code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(posterior_residrt_plot,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;pctchange&quot;</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">rootdir =</span> <span class="st">&quot;Figures&quot;</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">use_subfolders =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span><span class="fl">6.5</span>, <span class="at">height =</span> <span class="fl">3.25</span>, <span class="at">scale =</span> <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(posterior_residrt_plot,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;pctchange&quot;</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">rootdir =</span> <span class="st">&quot;Figures&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">use_subfolders =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span><span class="fl">6.5</span>, <span class="at">height =</span> <span class="fl">3.25</span>, <span class="at">scale =</span> <span class="fl">1.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3360,36 +3895,36 @@ bmdl_simple         -162.1      25.4 </code></pre>
 <h2 class="anchored" data-anchor-id="condition-only-rts">Condition-only RTs</h2>
 <p>Below we wrangle the data for the model using the HF16 items.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrangle the dataset to use for modeling, including the HF16-adapted items</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>alldata_contrasts <span class="ot">&lt;-</span> <span class="fu">list</span>(tune <span class="sc">~</span> sum_code <span class="sc">+</span> <span class="st">&quot;hll&quot;</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                          condition <span class="sc">~</span> helmert_code <span class="sc">|</span> <span class="fu">c</span>(<span class="st">&#39;lower-higher&#39;</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;contr-scalar&#39;</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;noncontr-contr&#39;</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;unrelated-related&#39;</span>))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>model_data_alldata <span class="ot">&lt;-</span> </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  exp_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flag_trial_outliers</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(condition <span class="sc">!=</span> <span class="st">&quot;filler&quot;</span>,</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                <span class="sc">!</span>is_outlier,</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                is_correct) <span class="sc">|&gt;</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Some centering and data transformations</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">wrangle_covariates</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">join_metrics</span>(metrics) <span class="sc">|&gt;</span> </span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">experiment_set =</span> <span class="fu">ifelse</span>(condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;contrastive&#39;</span>, </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;noncontrastive&#39;</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;unrelated&#39;</span>),</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&#39;hf16&#39;</span>,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                                        condition),</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">experiment_set =</span> <span class="fu">factor</span>(experiment_set,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;higher&#39;</span>, <span class="st">&#39;lower&#39;</span>,<span class="st">&#39;hf16&#39;</span>)),</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;higher&quot;</span>, <span class="st">&quot;lower&quot;</span>,</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;contrastive&quot;</span>, <span class="st">&quot;noncontrastive&quot;</span>,</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;unrelated&quot;</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_contrasts</span>(alldata_contrasts)</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast information</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse_contrasts</span>(model_data_alldata, alldata_contrasts,<span class="at">add_namespace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrangle the dataset to use for modeling, including the HF16-adapted items</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>alldata_contrasts <span class="ot">&lt;-</span> <span class="fu">list</span>(tune <span class="sc">~</span> sum_code <span class="sc">+</span> <span class="st">&quot;hll&quot;</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                          condition <span class="sc">~</span> helmert_code <span class="sc">|</span> <span class="fu">c</span>(<span class="st">&#39;lower-higher&#39;</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;contr-scalar&#39;</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;noncontr-contr&#39;</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                                       <span class="st">&#39;unrelated-related&#39;</span>))</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>model_data_alldata <span class="ot">&lt;-</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  exp_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">flag_trial_outliers</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(condition <span class="sc">!=</span> <span class="st">&quot;filler&quot;</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                <span class="sc">!</span>is_outlier,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                is_correct) <span class="sc">|&gt;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Some centering and data transformations</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">wrangle_covariates</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  sosdiss2<span class="sc">::</span><span class="fu">join_metrics</span>(metrics) <span class="sc">|&gt;</span> </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">experiment_set =</span> <span class="fu">ifelse</span>(condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&#39;contrastive&#39;</span>, </span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;noncontrastive&#39;</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&#39;unrelated&#39;</span>),</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&#39;hf16&#39;</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>                                        condition),</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">experiment_set =</span> <span class="fu">factor</span>(experiment_set,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&#39;higher&#39;</span>, <span class="st">&#39;lower&#39;</span>,<span class="st">&#39;hf16&#39;</span>)),</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;higher&quot;</span>, <span class="st">&quot;lower&quot;</span>,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;contrastive&quot;</span>, <span class="st">&quot;noncontrastive&quot;</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                                                         <span class="st">&quot;unrelated&quot;</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_contrasts</span>(alldata_contrasts)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Contrast information</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse_contrasts</span>(model_data_alldata, alldata_contrasts,<span class="at">add_namespace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
   factor             n level_names scheme                    reference intercept
@@ -3399,8 +3934,8 @@ bmdl_simple         -162.1      25.4 </code></pre>
 3 original_item    311 &lt;chr [311]&gt; stats::contr.treatment    10contra… mean(10c…
 4 experiment_set     3 &lt;chr [3]&gt;   stats::contr.treatment    higher    mean(hig…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifying the helmert direction</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">fractions</span>(<span class="fu">contrasts</span>(model_data_alldata<span class="sc">$</span>condition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifying the helmert direction</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>MASS<span class="sc">::</span><span class="fu">fractions</span>(<span class="fu">contrasts</span>(model_data_alldata<span class="sc">$</span>condition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               lower-higher contr-scalar noncontr-contr unrelated-related
 higher         -1/2         -1/3         -1/4           -1/5             
@@ -3412,74 +3947,169 @@ unrelated         0            0            0            4/5             </code>
 </div>
 <p>Below we fit the model for the condition-level predictions (ie without intonation). The HF16-adapted items are only recorded with a single tune (out of 6), so we don’t include tune <em>and</em> random intercepts by item for that dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set weak priors for the model</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>alldata_priors <span class="ot">&lt;-</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>,.<span class="dv">03</span>), <span class="at">class =</span> <span class="st">&#39;b&#39;</span>),</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> <span class="st">&#39;cor&#39;</span>),</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">3</span>,.<span class="dv">4</span>), <span class="at">class =</span> <span class="st">&#39;sd&#39;</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>alldata_mdl_notune <span class="ot">&lt;-</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_generic_rt_model</span>(<span class="fu">bf</span>(rt <span class="sc">~</span>  center_log_freq <span class="sc">+</span> center_length <span class="sc">+</span> block <span class="sc">+</span> condition <span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                            (<span class="dv">1</span><span class="sc">+</span>condition<span class="sc">|</span>participant),</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                          sigma <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>participant)),</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;alldata_mdl_notune&quot;</span>,</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> model_data_alldata,</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">priors =</span> alldata_priors)</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>alldata_mdl_notune2 <span class="ot">&lt;-</span> </span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_generic_rt_model</span>(<span class="fu">bf</span>(rt <span class="sc">~</span>  center_log_freq <span class="sc">+</span> center_length <span class="sc">+</span> block <span class="sc">+</span> condition <span class="sc">+</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>                            (<span class="dv">1</span><span class="sc">+</span>condition<span class="sc">|</span>participant) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>original_item),</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>                          sigma <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>participant)<span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>original_item)),</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;alldata_mdl_notune2&quot;</span>,</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> model_data_alldata,</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">priors =</span> alldata_priors)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="fu">loo_compare</span>(alldata_mdl_notune, alldata_mdl_notune2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set weak priors for the model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>alldata_priors <span class="ot">&lt;-</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>,.<span class="dv">03</span>), <span class="at">class =</span> <span class="st">&#39;b&#39;</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">lkj</span>(<span class="dv">2</span>), <span class="at">class =</span> <span class="st">&#39;cor&#39;</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(.<span class="dv">3</span>,.<span class="dv">4</span>), <span class="at">class =</span> <span class="st">&#39;sd&#39;</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>alldata_mdl_notune <span class="ot">&lt;-</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_generic_rt_model</span>(<span class="fu">bf</span>(rt <span class="sc">~</span>  center_log_freq <span class="sc">+</span> center_length <span class="sc">+</span> block <span class="sc">+</span> condition <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                            (<span class="dv">1</span><span class="sc">+</span>condition<span class="sc">|</span>participant),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                          sigma <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>participant)),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;alldata_mdl_notune&quot;</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> model_data_alldata,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">priors =</span> alldata_priors)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>alldata_mdl_notune2 <span class="ot">&lt;-</span> </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_generic_rt_model</span>(<span class="fu">bf</span>(rt <span class="sc">~</span>  center_log_freq <span class="sc">+</span> center_length <span class="sc">+</span> block <span class="sc">+</span> condition <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                            (<span class="dv">1</span><span class="sc">+</span>condition<span class="sc">|</span>participant) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>original_item),</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>                          sigma <span class="sc">~</span> (<span class="dv">1</span><span class="sc">|</span>participant)<span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>original_item)),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&quot;alldata_mdl_notune2&quot;</span>,</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> model_data_alldata,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                       <span class="at">priors =</span> alldata_priors)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">loo_compare</span>(alldata_mdl_notune, alldata_mdl_notune2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    elpd_diff se_diff
 alldata_mdl_notune2    0.0       0.0 
 alldata_mdl_notune  -409.0      33.5 </code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(alldata_mdl_notune2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: lognormal 
+  Links: mu = identity; sigma = log 
+Formula: rt ~ center_log_freq + center_length + block + condition + (1 + condition | participant) + (1 | original_item) 
+         sigma ~ (1 | participant) + (1 | original_item)
+   Data: data (Number of observations: 7705) 
+  Draws: 4 chains, each with iter = 10000; warmup = 2000; thin = 2;
+         total post-warmup draws = 16000
+
+Multilevel Hyperparameters:
+~original_item (Number of levels: 311) 
+                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sd(Intercept)           0.07      0.00     0.06     0.07 1.00     8330    12236
+sd(sigma_Intercept)     0.17      0.01     0.14     0.19 1.00     9442    13096
+
+~participant (Number of levels: 63) 
+                                                        Estimate Est.Error
+sd(Intercept)                                               0.13      0.01
+sd(conditionlowerMhigher)                                   0.01      0.01
+sd(conditioncontrMscalar)                                   0.03      0.01
+sd(conditionnoncontrMcontr)                                 0.03      0.01
+sd(conditionunrelatedMrelated)                              0.05      0.01
+sd(sigma_Intercept)                                         0.22      0.02
+cor(Intercept,conditionlowerMhigher)                        0.04      0.30
+cor(Intercept,conditioncontrMscalar)                        0.07      0.20
+cor(conditionlowerMhigher,conditioncontrMscalar)           -0.12      0.34
+cor(Intercept,conditionnoncontrMcontr)                     -0.03      0.21
+cor(conditionlowerMhigher,conditionnoncontrMcontr)         -0.16      0.34
+cor(conditioncontrMscalar,conditionnoncontrMcontr)          0.43      0.25
+cor(Intercept,conditionunrelatedMrelated)                  -0.09      0.17
+cor(conditionlowerMhigher,conditionunrelatedMrelated)      -0.13      0.33
+cor(conditioncontrMscalar,conditionunrelatedMrelated)       0.39      0.23
+cor(conditionnoncontrMcontr,conditionunrelatedMrelated)     0.37      0.24
+                                                        l-95% CI u-95% CI Rhat
+sd(Intercept)                                               0.11     0.15 1.00
+sd(conditionlowerMhigher)                                   0.00     0.03 1.00
+sd(conditioncontrMscalar)                                   0.01     0.05 1.00
+sd(conditionnoncontrMcontr)                                 0.01     0.05 1.00
+sd(conditionunrelatedMrelated)                              0.03     0.06 1.00
+sd(sigma_Intercept)                                         0.18     0.26 1.00
+cor(Intercept,conditionlowerMhigher)                       -0.55     0.62 1.00
+cor(Intercept,conditioncontrMscalar)                       -0.33     0.47 1.00
+cor(conditionlowerMhigher,conditioncontrMscalar)           -0.71     0.56 1.00
+cor(Intercept,conditionnoncontrMcontr)                     -0.44     0.38 1.00
+cor(conditionlowerMhigher,conditionnoncontrMcontr)         -0.74     0.54 1.00
+cor(conditioncontrMscalar,conditionnoncontrMcontr)         -0.13     0.84 1.00
+cor(Intercept,conditionunrelatedMrelated)                  -0.41     0.24 1.00
+cor(conditionlowerMhigher,conditionunrelatedMrelated)      -0.72     0.54 1.00
+cor(conditioncontrMscalar,conditionunrelatedMrelated)      -0.11     0.80 1.00
+cor(conditionnoncontrMcontr,conditionunrelatedMrelated)    -0.14     0.79 1.00
+                                                        Bulk_ESS Tail_ESS
+sd(Intercept)                                               3082     5858
+sd(conditionlowerMhigher)                                   6393     8938
+sd(conditioncontrMscalar)                                   9039     8217
+sd(conditionnoncontrMcontr)                                 6825     5140
+sd(conditionunrelatedMrelated)                              9241    11662
+sd(sigma_Intercept)                                         5979    10151
+cor(Intercept,conditionlowerMhigher)                       14792    13625
+cor(Intercept,conditioncontrMscalar)                       14066    13113
+cor(conditionlowerMhigher,conditioncontrMscalar)            3381     6019
+cor(Intercept,conditionnoncontrMcontr)                     13820    13617
+cor(conditionlowerMhigher,conditionnoncontrMcontr)          4175     6936
+cor(conditioncontrMscalar,conditionnoncontrMcontr)          8664    11316
+cor(Intercept,conditionunrelatedMrelated)                  13122    13836
+cor(conditionlowerMhigher,conditionunrelatedMrelated)       2997     4929
+cor(conditioncontrMscalar,conditionunrelatedMrelated)       5968    10957
+cor(conditionnoncontrMcontr,conditionunrelatedMrelated)     7189     9580
+
+Regression Coefficients:
+                           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS
+Intercept                      6.26      0.02     6.23     6.29 1.00     1178
+sigma_Intercept               -1.71      0.03    -1.77    -1.65 1.00     3936
+center_log_freq               -0.03      0.00    -0.04    -0.03 1.00     7817
+center_length                  0.01      0.00     0.00     0.01 1.00     8053
+block                         -0.01      0.00    -0.01    -0.01 1.00    15030
+conditionlowerMhigher         -0.00      0.01    -0.03     0.02 1.00     7296
+conditioncontrMscalar          0.01      0.01    -0.01     0.03 1.00     8411
+conditionnoncontrMcontr        0.05      0.01     0.02     0.07 1.00     8372
+conditionunrelatedMrelated     0.09      0.01     0.06     0.11 1.00     9524
+                           Tail_ESS
+Intercept                      2782
+sigma_Intercept                7686
+center_log_freq               11385
+center_length                 11056
+block                         13656
+conditionlowerMhigher         10928
+conditioncontrMscalar         12339
+conditionnoncontrMcontr       11893
+conditionunrelatedMrelated    12611
+
+Draws were sampled using sample(hmc). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
 </div>
 <p>Make the barplot figure.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>datagrid_without_tunes <span class="ot">&lt;-</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">marginal_data_grid</span>(<span class="at">model =</span> alldata_mdl_notune2,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&#39;condition&#39;</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center_log_freq =</span> <span class="dv">0</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center_length =</span> <span class="dv">0</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">block =</span> <span class="dv">0</span>) </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>alldata_cond_draws <span class="ot">&lt;-</span> tidybayes<span class="sc">::</span><span class="fu">add_epred_draws</span>(datagrid_without_tunes, </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                                 alldata_mdl_notune2, </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">ndraws =</span> <span class="cn">NULL</span>, </span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">seed =</span> <span class="dv">11</span>, </span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">re_formula =</span> <span class="cn">NA</span>)</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>predicted_condition_rt_plot <span class="ot">&lt;-</span> </span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  alldata_cond_draws <span class="sc">|&gt;</span> </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean_hdi</span>(<span class="at">.width =</span> <span class="fu">c</span>(.<span class="dv">95</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> .epred, <span class="at">ymin =</span> .lower, <span class="at">ymax =</span> .upper)) <span class="sc">+</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point() +</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> .<span class="dv">75</span>, <span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;gray60&#39;</span>) <span class="sc">+</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">400</span>,<span class="dv">620</span>)) <span class="sc">+</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Lower</span><span class="sc">\n</span><span class="st">(cool)&quot;</span>, </span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Higher</span><span class="sc">\n</span><span class="st">(cold)&quot;</span>, </span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Contrastive</span><span class="sc">\n</span><span class="st">(painter)&quot;</span>, </span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;NonContrastive</span><span class="sc">\n</span><span class="st">(statue)&quot;</span>, </span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Unrelated</span><span class="sc">\n</span><span class="st">(register)&quot;</span>))<span class="sc">+</span></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Predicted RT&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="sc">+</span></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> .<span class="dv">3</span>),</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>())</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>predicted_condition_rt_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>datagrid_without_tunes <span class="ot">&lt;-</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">marginal_data_grid</span>(<span class="at">model =</span> alldata_mdl_notune2,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&#39;condition&#39;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center_log_freq =</span> <span class="dv">0</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center_length =</span> <span class="dv">0</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">block =</span> <span class="dv">0</span>) </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>alldata_cond_draws <span class="ot">&lt;-</span> tidybayes<span class="sc">::</span><span class="fu">add_epred_draws</span>(datagrid_without_tunes, </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                                                 alldata_mdl_notune2, </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">ndraws =</span> <span class="cn">NULL</span>, </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">seed =</span> <span class="dv">11</span>, </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">re_formula =</span> <span class="cn">NA</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>predicted_condition_rt_plot <span class="ot">&lt;-</span> </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  alldata_cond_draws <span class="sc">|&gt;</span> </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean_hdi</span>(<span class="at">.width =</span> <span class="fu">c</span>(.<span class="dv">95</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> .epred, <span class="at">ymin =</span> .lower, <span class="at">ymax =</span> .upper)) <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point() +</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> .<span class="dv">75</span>, <span class="at">color =</span> <span class="st">&#39;black&#39;</span>, <span class="at">fill =</span> <span class="st">&#39;gray60&#39;</span>) <span class="sc">+</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">width =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">400</span>,<span class="dv">620</span>)) <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Lower</span><span class="sc">\n</span><span class="st">(cool)&quot;</span>, </span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Higher</span><span class="sc">\n</span><span class="st">(cold)&quot;</span>, </span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Contrastive</span><span class="sc">\n</span><span class="st">(painter)&quot;</span>, </span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;NonContrastive</span><span class="sc">\n</span><span class="st">(statue)&quot;</span>, </span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;Unrelated</span><span class="sc">\n</span><span class="st">(register)&quot;</span>))<span class="sc">+</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Predicted RT&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Condition&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> .<span class="dv">3</span>),</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>predicted_condition_rt_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3487,26 +4117,26 @@ alldata_mdl_notune  -409.0      33.5 </code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(predicted_condition_rt_plot, <span class="st">&quot;predicted_condition_RT&quot;</span>,</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="fl">4.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save_plot</span>(predicted_condition_rt_plot, <span class="st">&quot;predicted_condition_RT&quot;</span>,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="fl">4.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="inline-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="inline-statistics">Inline statistics</h2>
 <p>Inline statistics are reported using the latex commands created below, see https://tsostaricsblog.netlify.app/posts/latexswitch/ for more information.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(base_critical_WKSLP, </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">effects =</span> <span class="st">&quot;fixed&quot;</span>, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">conf.int=</span><span class="cn">TRUE</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change =</span> <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">exp</span>(estimate) <span class="sc">-</span> <span class="dv">1</span>),<span class="dv">2</span>),</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">term =</span> <span class="fu">casefold</span>(<span class="fu">gsub</span>(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;i&quot;</span>, term)),</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">&quot;[)(]&quot;</span>, <span class="st">&quot;&quot;</span>, term),</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">&#39;estimate&#39;</span>, <span class="st">&#39;conf.low&#39;</span>, <span class="st">&#39;conf.high&#39;</span>)), <span class="sc">~</span><span class="fu">round</span>(.,<span class="dv">3</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_latex_switch</span>(<span class="at">fstring =</span> <span class="st">&quot;$(</span><span class="sc">\\</span><span class="st">hat</span><span class="sc">\\</span><span class="st">beta = {estimate}, </span><span class="sc">\\</span><span class="st">%</span><span class="sc">\\</span><span class="st">Delta= {pct_change}</span><span class="sc">\\</span><span class="st">%, CI=[{conf.low},{conf.high}])$&quot;</span>,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">macroname =</span> <span class="st">&quot;tuneStat&quot;</span>,</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">add_found_boolean =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressWarnings</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(base_critical_WKSLP, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">effects =</span> <span class="st">&quot;fixed&quot;</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">conf.int=</span><span class="cn">TRUE</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_change =</span> <span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span>(<span class="fu">exp</span>(estimate) <span class="sc">-</span> <span class="dv">1</span>),<span class="dv">2</span>),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">term =</span> <span class="fu">casefold</span>(<span class="fu">gsub</span>(<span class="st">&quot;:&quot;</span>, <span class="st">&quot;i&quot;</span>, term)),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">term =</span> <span class="fu">gsub</span>(<span class="st">&quot;[)(]&quot;</span>, <span class="st">&quot;&quot;</span>, term),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">across</span>(<span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">&#39;estimate&#39;</span>, <span class="st">&#39;conf.low&#39;</span>, <span class="st">&#39;conf.high&#39;</span>)), <span class="sc">~</span><span class="fu">round</span>(.,<span class="dv">3</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_latex_switch</span>(<span class="at">fstring =</span> <span class="st">&quot;$(</span><span class="sc">\\</span><span class="st">hat</span><span class="sc">\\</span><span class="st">beta = {estimate}, </span><span class="sc">\\</span><span class="st">%</span><span class="sc">\\</span><span class="st">Delta= {pct_change}</span><span class="sc">\\</span><span class="st">%, CI=[{conf.low},{conf.high}])$&quot;</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">macroname =</span> <span class="st">&quot;tuneStat&quot;</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">add_found_boolean =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\ExplSyntaxOn
  \setboolean{found}{false}
@@ -3537,9 +4167,9 @@ alldata_mdl_notune  -409.0      33.5 </code></pre>
  \cs_generate_variant:Nn \str_foldcase:n { e }
  \ExplSyntaxOff</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sosdiss2<span class="sc">::</span><span class="fu">model_to_latex_switch</span>(alldata_mdl_notune2,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;conditionStat&quot;</span>, </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">add_found_boolean =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sosdiss2<span class="sc">::</span><span class="fu">model_to_latex_switch</span>(alldata_mdl_notune2,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;conditionStat&quot;</span>, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">add_found_boolean =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>\ExplSyntaxOn
  \setboolean{found}{false}
