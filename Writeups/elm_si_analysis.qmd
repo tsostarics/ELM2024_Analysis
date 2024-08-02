@@ -15,7 +15,7 @@ XX.
 We only include the code related to the specific analyses and figures
 presented in the paper.
 
-```{r setup}
+```{r setup, message = FALSE}
 library(tidyverse)    # Data wrangling
 library(contrastable) # Contrast coding
 library(brms)         # Modeling
@@ -53,7 +53,7 @@ tune_contrasts <- list(tune ~ manual_contrast_matrix | c("lhsll-hll",
 
 # Load model data and apply contrasts
 model_data <- 
-  readRDS("Data/01_Processed/SI_model_data.rds") |> 
+  readRDS("Data/SI_model_data_elm.rds") |> 
   mutate(tune = factor(tune, levels = TUNE_ORDER)) |> 
   set_contrasts(tune_contrasts)
 
@@ -69,7 +69,7 @@ weak_tune_priors <-
     prior(normal(.3,.4), class = 'sd')
   )
 
-si_mdl <- wrap_diagnose(brm(resp_yes ~ tune + (1+tune|subj_id) + (1+tune|item),
+si_mdl <- (brm(resp_yes ~ tune + (1+tune|subj_id) + (1+tune|item),
                        data = model_data,
                        prior = weak_tune_priors,
                        chains = 4,
@@ -87,7 +87,7 @@ sosdiss2::model_to_latex_switch(si_mdl, "siModelStat")
 ```
 
 
-```{r}
+```{r, message = FALSE}
 PLOT_TUNE_ORDER <- c('hll','lhsll', 'lshll','hlh', 'lhslh', 'lshlh')
 
 avg_si_plot <-
@@ -107,7 +107,6 @@ avg_si_plot <-
 
 avg_si_plot
 
-# ggview::ggview(avg_si_plot, width = 5, height = 5)
 save_plot(avg_si_plot, "avg_si_plot",rootdir = "Figures/",
           width = 5, height = 5)
 ```

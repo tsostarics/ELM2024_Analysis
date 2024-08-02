@@ -8,6 +8,8 @@ project:
   execute-dir: project
 editor_options: 
   chunk_output_type: console
+execute: 
+  warning: false
 ---
 
 ## Overview
@@ -54,8 +56,81 @@ library(tidybayes)    #
 library(ggdist)       #
 library(ggnewscale)   # Plot scale helpers
 library(here)         # Directory management
+library(broom.mixed)
 
-source(here::here("Helpers/brms_helpers.R")) # TODO: delete this
+# pulled out of {sosdiss2}
+plot_posterior_rt_draws <- function(condition_difference_draws,
+                                    scale = 1.2,
+                                    slab_scale = 1,
+                                    facet_labels = c('lower'  = "Hear tough, see impossible",
+                                                     'higher' = 'Hear impossible, see tough'),
+                                    debug_red = FALSE,
+                                    ...) {
+  percent_change_df <- compute_percent_change(condition_difference_draws)
+  
+  plot_df <-
+    condition_difference_draws |>
+    dplyr::left_join(dplyr::select(percent_change_df, condition, tune, past_95))
+  
+  condition_difference_draws |>
+    ggplot(aes(x = tune, y = difference)) +
+    ggplot2::geom_hline(yintercept = 0,
+                        linetype = 'dashed',
+                        color = 'gray10')+
+    ggdist::stat_histinterval(data = dplyr::filter(plot_df, !past_95 | debug_red),
+                              aes(fill = factor(after_stat(.width))),
+                              point_interval = 'mean_qi',
+                              .width = c(.5, .89, .95),
+                              slab_linewidth = .1,
+                              height = 1,
+                              scale = .95,
+                              trim = FALSE,
+                              outline_bars = TRUE) +
+    ggplot2::scale_fill_brewer(palette = "Greys", direction = -1) +
+    ggnewscale::new_scale_fill() +
+    ggdist::stat_histinterval(data = dplyr::filter(plot_df, past_95),
+                              
+                              aes(fill = factor(after_stat(.width))),
+                              point_interval = 'mean_qi',
+                              .width = c(.5, .89, .95),
+                              slab_linewidth = .5,
+                              height = 1,
+                              alpha = ifelse(debug_red, .5, 1),
+                              scale = slab_scale * .95, # Needed to match the scaling of the gray ones
+                              color = "#380202",
+                              point_fill = "#fee0d2",
+                              fatten_point = 2.25,
+                              shape = 23,
+                              trim = FALSE,
+                              outline_bars = TRUE) +
+    scale_thickness_shared()+
+    ggplot2::scale_fill_brewer(palette = "Reds", direction = -1) +
+    
+    ggplot2::geom_text(data = percent_change_df,
+                       aes(x = tune,
+                           y = difference,
+                           label = pct_label),
+                       position = position_nudge(x=.09,y=.002),
+                       angle = -15,
+                       hjust = 0,
+                       fontface = "bold",
+                       size = 4,
+                       color = 'white') +
+    ggplot2::facet_grid(~condition,
+                        labeller = labeller(.cols = facet_labels)) +
+    ggplot2::theme_bw(base_size = 16*scale) +
+    ggplot2::coord_cartesian(xlim = c(.5,7.1),
+                             # ylim = c(-.05, .05),
+                             clip = TRUE,
+                             expand = FALSE)+
+    scale_y_continuous(labels = scales::label_percent()) +
+    ggplot2::theme(panel.grid = element_line(linewidth = .3),
+                   panel.grid.minor.x = element_blank(),
+                   legend.position = 'none') +
+    ggplot2::xlab("Tune") +
+    ggplot2::ylab("% Difference\nfrom Condition Mean")
+}
+
 ```
 
 ## Data wrangling
@@ -64,7 +139,7 @@ Load the raw experimental data and lexical measures, processes the data to
 the final dataset fed to the model.
 
 ```{r, message = FALSE}
-exp_data <- readRDS("Data/01_Processed/exp_data.rds")
+exp_data <- readRDS("Data/exp_data.rds")
 
 # Load the lexical measures
 metrics <- 
@@ -120,64 +195,28 @@ base_model_priors <-
     prior(normal(.3,.4), class = 'sd')
   )
 # 
-# fit_generic_rt_model <- function(formula, filename, data=model_data, priors=base_model_priors) {
-#   mdl <- brm(formula = formula,
-#              data = data,
-#              family = lognormal(),
-#              seed = 111,
-#              cores = 4,
-#              chains = 4,
-#              threads = threading(3),
-#              file = file.path(here::here("Models"), paste0(filename, ".rds")),
-#              file_refit = "on_change",
-#              iter = 10000,
-#              warmup = 2000,
-#              thin = 2,
-#              silent = 0,
-#              verbose = TRUE,
-#              save_pars = save_pars(all = TRUE),
-#              backend = 'cmdstanr',
-#              prior = priors)
-#   
-#   if (!'loo' %in% names(mdl[['criteria']]))
-#     message("Starting loo: ", Sys.time())
-#   
-#   add_criterion(mdl, "loo")
-# }
-
-
 fit_generic_rt_model <- function(formula, filename, data=model_data, priors=base_model_priors) {
-  model_call <- expression(brm(formula = formula,
-                               data = data,
-                               family = lognormal(),
-                               seed = 111,
-                               cores = 4,
-                               chains = 4,
-                               threads = threading(3),
-                               file = file.path(here::here("Models"), paste0(filename, ".rds")),
-                               file_refit = "on_change",
-                               iter = 10000,
-                               warmup = 2000,
-                               thin = 2,
-                               silent = 0,
-                               save_pars = save_pars(all = TRUE),
-                               backend = 'cmdstanr',
-                               prior = priors))
-  
-  model_call[[1]][[1]] <- sym('diagnose_refit')
-  should_refit <- determine_refit(eval(model_call))
-  
-  message("Refit status for ", filename, ": ", should_refit)
-  
-  model_call[[1]][[1]] <- sym('brm')
-  model_call[[1]]$file_refit <- should_refit 
-  
-  mdl <- eval(model_call)
-  
+  mdl <- brm(formula = formula,
+             data = data,
+             family = lognormal(),
+             seed = 111,
+             cores = 4,
+             chains = 4,
+             threads = threading(3),
+             file = file.path(here::here("Models"), paste0(filename, ".rds")),
+             file_refit = "on_change",
+             iter = 10000,
+             warmup = 2000,
+             thin = 2,
+             silent = 0,
+             save_pars = save_pars(all = TRUE),
+             backend = 'cmdstanr',
+             prior = priors)
+
   if (!'loo' %in% names(mdl[['criteria']]))
     message("Starting loo: ", Sys.time())
-  
-  add_criterion(mdl, "loo")
+
+  add_criterion(mdl, "loo",cores = 4)
 }
 ```
 
@@ -205,6 +244,8 @@ bmdl_simple <-
 
 # Compare whether the sigma parameter is beneficial
 loo_compare(bmdl_simple, base_critical_WKSLP)
+
+summary(base_critical_WKSLP)
 ```
 
 #### Model prediction plots
@@ -230,20 +271,20 @@ condition_difference_draws <-
                                                           "lhslh",
                                                           "lshlh"))
 posterior_residrt_plot <- 
-  sosdiss2::plot_posterior_rt_draws2(condition_difference_draws,
-                                     slab_scale = .5,
-                                     facet_labels = c(higher="Hear cold, see cool",
-                                                      lower="Hear cool, see cold")) + 
+  plot_posterior_rt_draws(condition_difference_draws,
+                          slab_scale = .5,
+                          facet_labels = c(higher="LowerTarget",
+                                           lower="HigherTarget")) + 
   scale_y_continuous(labels = scales::label_percent(), limits = c(-.05, .05))+
-  scale_x_discrete(labels = c("H*LL", "LH*LL", "L*HLL", "H*LH", "LH*LH", "L*HLH"))
+  scale_x_discrete(labels = c("H*", "LH*\nL-L%", "L*H", "H*", "LH*\nL-H%", "L*H"))
 
-posterior_residrt_plot
+posterior_residrt_plot # x axis to be fixed up manually outside of R
 
 save_plot(posterior_residrt_plot,
-          "ldonly_basemodel_epred_speedup2",
+          "pctchange",
           rootdir = "Figures",
           use_subfolders = TRUE,
-          width =8.5, height = 4.5, scale = 1.2)
+          width =6.5, height = 3.25, scale = 1.5)
 ```
 
 
@@ -318,6 +359,8 @@ alldata_mdl_notune2 <-
                        priors = alldata_priors)
 
 loo_compare(alldata_mdl_notune, alldata_mdl_notune2)
+
+summary_alldata_mdl_notune2
 ```
 
 Make the barplot figure.
