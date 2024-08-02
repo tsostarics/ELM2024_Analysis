@@ -29,8 +29,10 @@ We only include the code related to the specific analyses and figures presented 
 
 ### Figures
 
-  - ldonly_basemodel_epred_speedup2: Posterior distribution as percent change for critical conditions
-  - predicted_condition_RT: Posterior predicted RTs by-condition (no intonation included/averaged acros intonation conditions)
+  - avg_si_plot: Empirical SI rate averages (Fig. 2 of the paper)
+  - pctchange: Posterior percent change distributions (unedited Fig. 4 of the paper)
+  - pctchange-fixed: Edited percent change plot with fixed axes (Fig. 4 of the paper)
+  - predicted_condition_RT: Posterior predicted RTs by-condition (Fig. 3 of the paper)
 
 ### Models
 
