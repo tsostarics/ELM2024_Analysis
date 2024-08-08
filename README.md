@@ -36,7 +36,7 @@ We only include the code related to the specific analyses and figures presented 
 
 ### Models
 
-Note that the model files are not on github since they're so large; they are on the osf at LINK.
+Note that the model files are not on github since they're so large; they are on the osf at https://osf.io/bc6a2/.
 
 * denotes the model reported in the text
 
